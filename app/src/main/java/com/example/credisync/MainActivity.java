@@ -51,16 +51,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //hi arvs
         setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color
+        signupTxt.setPaintFlags(signupTxt.getPaintFlags()|Paint.UNDERLINE_TEXT_FLAG);
         db = FirebaseFirestore.getInstance(); //initialize firebase fire store
 
         findViewById(); //reference to ui elements method call
         textWatchers(); //text watchers method call
         emailInputListener(); //input listener for email address edit text
         passwordInputListener(); //input listener for password edit text
-
-        signupTxt.setPaintFlags(signupTxt.getPaintFlags()|Paint.UNDERLINE_TEXT_FLAG);
 
         //login process
         loginButton.setOnClickListener(new View.OnClickListener() {

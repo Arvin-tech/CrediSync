@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -71,8 +72,9 @@ public class ApplicantSignup extends AppCompatActivity {
         setContentView(R.layout.activity_applicant_signup);
 
         setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color
-
+        login.setPaintFlags(login.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         db = FirebaseFirestore.getInstance(); //initialize firebase fire store
+
         findViewById(); //reference to ui elements
         textWatchers(); //input text watchers
         inputListeners(); //input listeners
