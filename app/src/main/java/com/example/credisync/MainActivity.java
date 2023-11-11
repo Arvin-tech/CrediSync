@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //hi arvs
         setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color
         db = FirebaseFirestore.getInstance(); //initialize firebase fire store
 
