@@ -27,9 +27,9 @@
         android:layout_height="22dp"
         android:layout_gravity="start"
         android:fontFamily="@font/poppins_bold"
-        android:text="Login Details"
+        android:text="Account Details"
         android:textColor="@color/black"
-        android:textSize="15dp"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -306,7 +306,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
         android:textColor="@color/black"
-        android:text="I agree with"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.278"
@@ -320,13 +320,13 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
         android:text="Terms and Conditions"
-        android:textColor="@color/yellow"
+        android:textColor="@color/join"
         app:layout_constraintBottom_toTopOf="@+id/buttonSignup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.717"
+        app:layout_constraintHorizontal_bias="0.617"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout5"
-        app:layout_constraintVertical_bias="0.442" />
+        app:layout_constraintVertical_bias="0.48" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSignup"
@@ -337,10 +337,10 @@
         android:enabled="false"
         android:fontFamily="@font/poppins_bold"
         android:padding="16dp"
-        android:text="Next"
+        android:text="NEXT"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -348,21 +348,38 @@
         app:layout_constraintTop_toBottomOf="@+id/agreeCheckbox"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textViewLogin"
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginTop="34dp"
-        android:fontFamily="@font/poppins_bold"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:text="Already have an account? Login"
-        android:textColor="@color/black"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSignup"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignup">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Already have an account? "
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="137dp"
+            tools:layout_editor_absoluteY="669dp" />
+
+        <TextView
+            android:id="@+id/textViewLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Sign In"
+            android:textColor="@color/join"
+            tools:layout_editor_absoluteX="263dp"
+            tools:layout_editor_absoluteY="708dp" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
