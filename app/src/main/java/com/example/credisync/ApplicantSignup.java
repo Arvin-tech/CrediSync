@@ -72,12 +72,13 @@ public class ApplicantSignup extends AppCompatActivity {
         setContentView(R.layout.activity_applicant_signup);
 
         setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color
-        login.setPaintFlags(login.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         db = FirebaseFirestore.getInstance(); //initialize firebase fire store
 
         findViewById(); //reference to ui elements
         textWatchers(); //input text watchers
         inputListeners(); //input listeners
+
+        login.setPaintFlags(login.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG); //under line sign in textview
 
         emailTxt.addTextChangedListener(signupTextWatcher);
         passwordTxt.addTextChangedListener(signupTextWatcher);
@@ -104,8 +105,8 @@ public class ApplicantSignup extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                redirectLoginActivity();
-            } //proceeds to login activity
+                redirectLoginActivity(); //proceeds to login activity
+            }
         });
 
         //checkbox
@@ -260,7 +261,7 @@ public class ApplicantSignup extends AppCompatActivity {
         passwordTxt = (EditText) findViewById(R.id.passwordEditTxt);
         confirmPassTxt = (EditText) findViewById(R.id.passwordConfirmEditTxt);
         signUp = (AppCompatButton) findViewById(R.id.buttonSignup);
-        login = (TextView) findViewById(R.id.textViewLogin);
+        login = (TextView) findViewById(R.id.textViewSignIn);
         privacyPolicy = (CheckBox) findViewById(R.id.agreeCheckbox);
         terms = (TextView) findViewById(R.id.termsTxt);
 
