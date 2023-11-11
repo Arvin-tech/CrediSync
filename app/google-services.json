@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "620163199843",
+    "project_id": "credisync-c0777",
+    "storage_bucket": "credisync-c0777.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620163199843:android:f8f4198a122c8817621956",
+        "android_client_info": {
+          "package_name": "com.example.credisync"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClp3jZnPo59v9acS56BXF16l_nJBBwuyw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

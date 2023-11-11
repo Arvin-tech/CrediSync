@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/backdrop"
+    android:padding="15dp"
+    tools:context=".ApplicantSignupStep2">
+
+
+    <!--First Name Input-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="Personal Details"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_gravity="start"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/firstNameLayout"
+        android:layout_width="380dp"
+        android:layout_height="80dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:hintEnabled="false"
+        android:padding="5dp"
+        app:startIconDrawable="@drawable/baseline_person_24"
+        app:startIconTint="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/firstNameEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_round"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/first_name"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/light_gray" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--Last Name Input-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lastNameLayout"
+        android:layout_width="380dp"
+        android:layout_height="80dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:hintEnabled="false"
+        android:padding="5dp"
+        app:startIconDrawable="@drawable/baseline_person_24"
+        app:startIconTint="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/lastNameEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_round"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/last_name"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/light_gray" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--Phone Input-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phoneNumberLayout"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        app:counterEnabled="true"
+        app:counterMaxLength="11"
+        app:errorEnabled="true"
+        app:hintEnabled="false"
+        android:padding="5dp"
+        app:startIconDrawable="@drawable/baseline_call_24"
+        app:startIconTint="@color/black"
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_round"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/phone"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/light_gray"
+            android:inputType="phone" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--Phone Input-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/birthdateLayout"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        app:hintEnabled="false"
+        android:padding="5dp"
+        app:startIconDrawable="@drawable/baseline_calendar_month_24"
+        app:startIconTint="@color/black"
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/birthdateTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_round"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Date of Birth"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/light_gray"
+            android:inputType="phone" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--Signup-->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonSignup"
+        android:layout_width="290dp"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/button_bg"
+        android:fontFamily="@font/poppins_bold"
+        android:padding="14dp"
+        android:text="Signup"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

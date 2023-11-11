@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">CrediSync</string>
+
+    <!--Facebook integration-->
+    <string name="facebook_app_id">2060351007632875</string>
+    <string name="facebook_client_token">1b295fa9c268b4d95d7f3326b4cf946e</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+
+
+    <string name="choose">Choose file</string>
+    <string name="upload">Upload</string>
+
+    <!--Login, Signup and Authentication-->
+    <string name="login">Login</string>
+    <string name="signup">Signup</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="phone">Contact Number</string>
+    <string name="password">Password</string>
+    <string name="confirm">Confirm Password</string>
+    <string name="reset">Reset Password</string>
+    <string name="code">Enter 6-digit code</string>
+    <string name="terms">Terms &amp; Conditions</string>
+
+    <!--Long texts-->
+    <string name="reset_prompt">Please enter the email associated with your account, and we will send you a reset code to create a new password.</string>
+    <string name="enter_code">Enter the reset code you received from your email</string>
+    <string name="required">Required</string>
+    <string name="prompt">Choose a strong password to log in to your account. A strong password contains at least 1 digit, lower case letter, upper case letter and a special character.</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Home page headings-->
+    <string name="heading_one">Discover Pet Care Excellence</string>
+    <string name="heading_two">Elevate Your Pet\'s Outdoor Adventures</string>
+    <string name="heading_three">Connect with a Pet-Loving Community</string>
+
+    <!--Home page slider descriptions-->
+    <string name="desc_one">Tailored pet care at your fingertips</string>
+    <string name="desc_two">Simplify pet care with our app.</string>
+    <string name="desc_three">A world of pet care in one app</string>
+
+    <!--For icons-->
+    <string name="dashboard">Dashboard</string>
+    <string name="score">Credit Score</string>
+    <string name="notifications">Notifications</string>
+    <string name="profile">Profile</string>
+
+
+</resources>
