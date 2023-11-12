@@ -35,21 +35,19 @@ import java.util.regex.Pattern;
 public class ApplicantSignupStep2 extends AppCompatActivity {
 
     protected final String TAG = this.getClass().getName(); //tag argument is the tag of the message,  msg argument is the message to display on the Logcat
-    protected final String ROLE = "Loan Applicant"; //this is a signup for loan applicants
     protected static final Pattern PHONE_PATTERN = Pattern.compile("09[0-9]{9}"); //philippine format? 09 prefix yarn
     protected EditText firstNameTxt, lastNameTxt, phoneTxt, birthTxt;
     protected TextInputLayout firstNameLayout, lastNameLayout, phoneLayout;
     protected AppCompatButton signUp;
     protected String inputtedFirstName, inputtedLastName, inputtedPhone, inputtedBirthdate; //input variables for this activity/page
-    protected String userEmail, userPassword, userConfirmPassword; //variables for user data sent from step 1
     protected FirebaseFirestore db; //cloud fire store
     protected Map<String, Object> user; //used to save user details
-    protected int accountNumber = generateAccountNumber();
     protected Calendar calendar = Calendar.getInstance();
     protected SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //year month date -- hour minute seconds
     protected String currentDate = simpleDateFormat.format(calendar.getTime()); //or currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
     protected int redColor = Color.parseColor("#FF0000");
     DatePickerDialog.OnDateSetListener setListener;
+    protected String getEmail, getUserPassword, getUserConfirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +98,14 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
                 inputtedLastName = lastNameTxt.getText().toString();
                 inputtedPhone = phoneTxt.getText().toString();
                 inputtedBirthdate = birthTxt.getText().toString();
-                saveToFirebase(); //method call
+
+                Intent intent = new Intent(getApplicationContext(), SignupVerification.class);
+                //send email , firstname, lastname, phone and birthdate to signup verification
+                intent.putExtra("email", getEmail);
+                intent.putExtra("firstname", inputtedFirstName);
+                intent.putExtra("lastname", inputtedLastName);
+                intent.putExtra("phone", inputtedPhone);
+                intent.putExtra("birthdate", inputtedBirthdate);
             }
         });
     }
@@ -134,51 +139,15 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     }
 
     protected void getSignupPageData(){
+        //getEmail = getIntent().getStringExtra("email"); //receive email from applicant signup activity
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            userEmail = extras.getString("email"); //key
-            userPassword = extras.getString("password"); //key
-            userConfirmPassword = extras.getString("confirm"); //key
+            getEmail = extras.getString("email"); //key
+            getUserPassword = extras.getString("password"); //key
+            getUserConfirmPassword = extras.getString("confirm"); //key
         }
     }
 
-    //this method creates a user account and save details to firebase
-    protected void saveToFirebase(){
-        user = new HashMap<>();
-        user.put("accountNumber", accountNumber); //generated account number
-        user.put("dateRegistered", currentDate);
-        user.put("role", ROLE);
-
-        //data from Step1
-        user.put("email", userEmail);
-        user.put("password", userConfirmPassword);
-
-        //data from step 2
-        user.put("firstname", inputtedFirstName);
-        user.put("lastname", inputtedLastName);
-        user.put("phone", inputtedPhone);
-        user.put("birthdate", inputtedBirthdate);
-
-        // Set the document ID as the inputted email
-        db.collection("Users")
-                .document(userEmail)
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + userEmail);
-                        redirectSignupVerification(inputtedFirstName); //pass inputted first name at edit text as parameter
-                        //Toast.makeText(Signup.this, "Successfully Added " + name, Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), "Error adding user " + e, Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "Error adding document", e);
-                    }
-                });
-    }
 
     protected void redirectLoginActivity(){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -186,20 +155,11 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
         finish(); //close signup two (step 2) activity
     }
 
-    protected void redirectSignupVerification(String firstNameTemp){
+    protected void redirectSignupVerification(String emailTemp, String passwordTemp, String firstNameTemp, String lastNameTemp){
         Intent intent = new Intent(getApplicationContext(), SignupVerification.class); //redirect to SignupVerification activity
         intent.putExtra("firstname", firstNameTemp); //send to SignupVerification activity
         startActivity(intent);
         //finish(); to be decided
-    }
-
-
-    //user id num
-    protected int generateAccountNumber() {
-        final int minCode = 10000000; // 8-digit numbers start from 100000
-        final int maxCode = 99999999; // 8-digit numbers end at 999999
-        Random random = new Random();
-        return random.nextInt(maxCode - minCode + 1) + minCode;
     }
 
     //boolean validations : firstname, lastname, contact number

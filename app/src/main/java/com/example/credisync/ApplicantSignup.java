@@ -208,51 +208,6 @@ public class ApplicantSignup extends AppCompatActivity {
         }
     }
 
-    //create users collection
-    protected void createUser(final String email, final String password) {
-        // Check if the email already exists in the collection
-        db.collection("Users")
-                .document(email) // Use the email as the document ID
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            Toast.makeText(getApplicationContext(), "Email already taken", Toast.LENGTH_SHORT).show(); //duplicate input
-                            emailTxt.setText(null); //clear duplicate input
-                        } else {
-                            // Email not duplicated, create the user document
-                            user = new HashMap<>();
-                            user.put("accountNumber", accountNumber);
-                            user.put("email", email);
-                            user.put("password", password);
-                            user.put("dateRegistered", currentDate);
-                            user.put("lastLogin", "not logged in"); //not working as intended
-
-                            // Set the document ID as the inputted email
-                            db.collection("Users")
-                                    .document(email)
-                                    .set(user)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d(TAG, "DocumentSnapshot added with ID: " + email);
-                                            redirectLoginActivity();
-                                            //Toast.makeText(Signup.this, "Successfully Added " + name, Toast.LENGTH_SHORT).show();
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(getApplicationContext(), "Error adding user " + e, Toast.LENGTH_SHORT).show();
-                                            Log.d(TAG, "Error adding document", e);
-                                        }
-                                    });
-                        }
-                    }
-                });
-    }
-
     //reference to ui elements
     protected void findViewById(){
 

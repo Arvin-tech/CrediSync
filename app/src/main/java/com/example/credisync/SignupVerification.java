@@ -1,5 +1,6 @@
 package com.example.credisync;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -21,8 +23,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
@@ -38,6 +47,7 @@ import javax.mail.internet.MimeMessage;
 
 public class SignupVerification extends AppCompatActivity {
 
+    protected final String TAG = this.getClass().getName();
     protected EditText otpTxt1, otpTxt2, otpTxt3, otpTxt4;
     protected TextView emailTxt, resendTxt;
     protected AppCompatButton verifyButton;
@@ -45,7 +55,14 @@ public class SignupVerification extends AppCompatActivity {
     protected int resendTime = 60; //in seconds
     protected int selectedETPosition = 0;
     protected int code = generateCode(); //get the generated code
-    protected String getEmail, getFirstname;
+
+    protected Map<String, Object> user; //used to save user details
+    protected int accountNumber = generateAccountNumber();
+    protected String getEmail, getUserPassword, getFirstname, getLastName, getContact, getBirthdate; //variable to receive data from applicant signup & applicant signup step 2
+    protected Calendar calendar = Calendar.getInstance();
+    protected SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //year month date -- hour minute seconds
+    protected String currentDate = simpleDateFormat.format(calendar.getTime()); //or currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+    protected FirebaseFirestore db; //cloud fire store
 
     protected final TextWatcher textWatcher = new TextWatcher() {
         private static final int MAX_EDIT_TEXT_INPUT_LENGTH = 1; //input limit per edit text
@@ -91,6 +108,7 @@ public class SignupVerification extends AppCompatActivity {
         setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color resendTextview
 
         findViewById(); //reference to ui elements
+        db = FirebaseFirestore.getInstance();
         resendTxt.setPaintFlags(resendTxt.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
 
         getEmail = getIntent().getStringExtra("email"); //receive email from applicant signup activity
@@ -119,7 +137,7 @@ public class SignupVerification extends AppCompatActivity {
                     }
                     //validate entered code
                     if(enteredCode == code){
-                        redirectLoginActivity();
+                        saveToFirebase();
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Incorrect verification code",Toast.LENGTH_SHORT).show();
@@ -203,6 +221,52 @@ public class SignupVerification extends AppCompatActivity {
         final int maxCode = 9999; // 4-digit numbers end at 9999
         Random random = new Random();
         return random.nextInt(maxCode - minCode + 1) + minCode;
+    }
+
+    protected int generateAccountNumber() {
+        final int minCode = 10000000; // 8-digit numbers start from 100000
+        final int maxCode = 99999999; // 8-digit numbers end at 999999
+        Random random = new Random();
+        return random.nextInt(maxCode - minCode + 1) + minCode;
+    }
+
+
+
+    //this method creates a user account and save details to firebase
+    protected void saveToFirebase(){
+        user = new HashMap<>();
+        user.put("Applicant ID", accountNumber); //generated account number
+
+        //data from Step1
+        user.put("LA_EmailAddress", getEmail);
+        user.put("LA_Password", getUserPassword);
+
+        //data from step 2
+        user.put("LA_FirstName", getFirstname);
+        user.put("LA_LastName", getLastName);
+        user.put("LA_ContactNo", getContact);
+        user.put("LA_Birthdate", getBirthdate);
+        user.put("LA_dateRegistered", currentDate);
+
+        // Set the document ID as the inputted email
+        db.collection("Loan Applicants")
+                .document(getEmail)
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + getEmail);
+                        redirectLoginActivity();
+                        Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Error adding user " + e, Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "Error adding document", e);
+                    }
+                });
     }
 
     protected void sendVerificationCode(String recipientEmail) {
