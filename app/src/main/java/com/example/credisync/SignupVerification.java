@@ -105,17 +105,14 @@ public class SignupVerification extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_verification);
 
+        db = FirebaseFirestore.getInstance();
         setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color resendTextview
 
         findViewById(); //reference to ui elements
-        db = FirebaseFirestore.getInstance();
         resendTxt.setPaintFlags(resendTxt.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        getSignupStep2Data();
 
-        getEmail = getIntent().getStringExtra("email"); //receive email from applicant signup activity
-        emailTxt.setText(getEmail); //set the text view in xml into the email from applicant signup\
-        getFirstname = getIntent().getStringExtra("firstname"); //receive first name from applicant signup step 2
-
-        //sendVerificationCode(getEmail); //pass the email from applicant signup as parameter
+        sendVerificationCode(getEmail); //pass the email from applicant signup as parameter
 
         otpTextWatcher();
         showKeyboard(otpTxt1);
@@ -157,6 +154,19 @@ public class SignupVerification extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    protected void getSignupStep2Data(){
+        getEmail = getIntent().getStringExtra("emailData"); //receive email from applicant signup activity
+        emailTxt.setText(getEmail); //set the text view in xml into the email from applicant signup\
+        getUserPassword = getIntent().getStringExtra("passwordData");
+
+        //receive data from applicant signup step 2 : observe the keys
+        getFirstname = getIntent().getStringExtra("firstnameData");
+        getLastName = getIntent().getStringExtra("lastnameData");
+        getContact = getIntent().getStringExtra("contactData");
+        getBirthdate = getIntent().getStringExtra("birthdateDate");
+
     }
 
     protected void redirectLoginActivity(){
@@ -229,8 +239,6 @@ public class SignupVerification extends AppCompatActivity {
         Random random = new Random();
         return random.nextInt(maxCode - minCode + 1) + minCode;
     }
-
-
 
     //this method creates a user account and save details to firebase
     protected void saveToFirebase(){

@@ -46,8 +46,8 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     protected SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //year month date -- hour minute seconds
     protected String currentDate = simpleDateFormat.format(calendar.getTime()); //or currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
     protected int redColor = Color.parseColor("#FF0000");
-    DatePickerDialog.OnDateSetListener setListener;
-    protected String getEmail, getUserPassword, getUserConfirmPassword;
+    protected DatePickerDialog.OnDateSetListener setListener;
+    protected String getEmail, getUserPassword, getUserConfirmPassword; //variables used to get data from applicant signup activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,12 +100,16 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
                 inputtedBirthdate = birthTxt.getText().toString();
 
                 Intent intent = new Intent(getApplicationContext(), SignupVerification.class);
+
                 //send email , firstname, lastname, phone and birthdate to signup verification
-                intent.putExtra("email", getEmail);
-                intent.putExtra("firstname", inputtedFirstName);
-                intent.putExtra("lastname", inputtedLastName);
-                intent.putExtra("phone", inputtedPhone);
-                intent.putExtra("birthdate", inputtedBirthdate);
+                intent.putExtra("emailData", getEmail);
+                intent.putExtra("passwordData", getUserPassword);
+                //intent.putExtra("confirmData", getUserConfirmPassword);
+
+                intent.putExtra("firstnameData", inputtedFirstName);
+                intent.putExtra("lastnameData", inputtedLastName);
+                intent.putExtra("contactData", inputtedPhone);
+                intent.putExtra("birthdateData", inputtedBirthdate);
             }
         });
     }
@@ -139,13 +143,17 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     }
 
     protected void getSignupPageData(){
-        //getEmail = getIntent().getStringExtra("email"); //receive email from applicant signup activity
+        getEmail = getIntent().getStringExtra("email"); //receive email from applicant signup activity
+        getUserPassword = getIntent().getStringExtra("password");
+
+        /*
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             getEmail = extras.getString("email"); //key
             getUserPassword = extras.getString("password"); //key
             getUserConfirmPassword = extras.getString("confirm"); //key
         }
+         */
     }
 
 

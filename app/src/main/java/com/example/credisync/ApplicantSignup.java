@@ -236,15 +236,10 @@ public class ApplicantSignup extends AppCompatActivity {
 
     protected void redirectStep2(String email, String password, String confirm){
         Intent intent = new Intent(getApplicationContext(), ApplicantSignupStep2.class); //proceed to step 2
-        intent.putExtra("email", email); //send to step 2
-        intent.putExtra("password", password); //send to step 2
+        intent.putExtra("email", email); //send to applicant signup step 2
+        intent.putExtra("password", password); //send to applicant signup step 2
         intent.putExtra("confirm", confirm); //send to step 2
         startActivity(intent);
-
-        //send this email also to otp verification activity
-        Intent otpIntent = new Intent(getApplicationContext(), SignupVerification.class);
-        otpIntent.putExtra("email", email);
-        startActivity(otpIntent);
     }
 
     //validators
