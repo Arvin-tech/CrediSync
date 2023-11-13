@@ -47,7 +47,7 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     protected String currentDate = simpleDateFormat.format(calendar.getTime()); //or currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
     protected int redColor = Color.parseColor("#FF0000");
     protected DatePickerDialog.OnDateSetListener setListener;
-    protected String getEmail, getUserPassword, getUserConfirmPassword; //variables used to get data from applicant signup activity
+    protected String getEmail, getUserPassword; //variables used to get data from applicant signup activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,9 +99,8 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
                 inputtedPhone = phoneTxt.getText().toString();
                 inputtedBirthdate = birthTxt.getText().toString();
 
+                //send email, password, firstname, lastname, phone and birthdate to signup verification
                 Intent intent = new Intent(getApplicationContext(), SignupVerification.class);
-
-                //send email , firstname, lastname, phone and birthdate to signup verification
                 intent.putExtra("emailData", getEmail);
                 intent.putExtra("passwordData", getUserPassword);
                 //intent.putExtra("confirmData", getUserConfirmPassword);
