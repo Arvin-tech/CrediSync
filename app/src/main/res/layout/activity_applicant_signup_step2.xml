@@ -10,6 +10,10 @@
     android:padding="15dp"
     tools:context=".ApplicantSignupStep2">
 
+    <ImageView
+        android:layout_width="182dp"
+        android:layout_height="170dp"
+        android:src="@drawable/cs1" />
 
     <!--First Name Input-->
     <TextView
@@ -22,6 +26,34 @@
         android:textColor="@color/black"
         android:textSize="26sp"
         android:textStyle="bold" />
+
+    <!--Member ID Input-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/memberId"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        app:counterEnabled="true"
+        app:counterMaxLength="11"
+        app:errorEnabled="true"
+        app:hintEnabled="false"
+        android:padding="5dp"
+        app:startIconDrawable="@drawable/baseline_person_24"
+        app:startIconTint="@color/black"
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/memberIdEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_round"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Membership ID"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/light_gray"
+            android:inputType="phone" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/firstNameLayout"
