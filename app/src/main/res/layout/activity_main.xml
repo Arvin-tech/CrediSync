@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,28 +13,20 @@
         android:id="@+id/imageView3"
         android:layout_width="340dp"
         android:layout_height="306dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="65dp"
         android:contentDescription="Logo"
-        android:src="@drawable/cs1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.089" />
+        android:src="@drawable/cs1" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailLayout"
         style="@style/AppTextInputLayout"
         android:layout_width="350dp"
         android:layout_height="80dp"
+        android:layout_below="@+id/imageView3"
         android:padding="5dp"
         app:errorEnabled="true"
         app:hintEnabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.015"
         app:startIconDrawable="@drawable/baseline_email_24"
         app:startIconTint="@color/black">
 
@@ -52,21 +44,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Your other views -->
-
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordLayout"
         style="@style/AppTextInputLayout"
         android:layout_width="350dp"
         android:layout_height="80dp"
+        android:layout_below="@+id/emailLayout"
         android:padding="5dp"
         app:errorEnabled="true"
         app:hintEnabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailLayout"
-        app:layout_constraintVertical_bias="0.0"
         app:passwordToggleDrawable="@drawable/password_toggle"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/black"
@@ -94,6 +80,8 @@
         android:id="@+id/forgotPasswordTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordLayout"
+        android:layout_marginStart="150dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Forgot your password?"
         android:textColor="@color/black"
@@ -110,30 +98,22 @@
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_margin="10dp"
+        android:layout_below="@+id/forgotPasswordTxt"
         android:background="@drawable/button_bg"
         android:fontFamily="@font/poppins_bold"
         android:padding="14dp"
         android:text="LOGIN"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forgotPasswordTxt"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textSize="16dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_below="@+id/buttonLogin"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -158,4 +138,4 @@
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
