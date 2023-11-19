@@ -33,7 +33,7 @@ public class ApplicantHome extends AppCompatActivity {
         setContentView(binding.getRoot()); //setContentView(R.layout.activity_home);
         replaceFragment(new DashboardFragment()); //default view
 
-        setStatusBarColor(getResources().getColor(R.color.light_gray));  // Set the status bar color to orange
+        setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color
         db = FirebaseFirestore.getInstance(); //initialize fire store
         sharedPreferences = getSharedPreferences("auth_data", Context.MODE_PRIVATE);
         getUserDetails(); //grab the email
