@@ -27,7 +27,7 @@
     <string name="reset_prompt">Please enter the email associated with your account, and we will send you a reset code to create a new password.</string>
     <string name="enter_code">Enter the reset code you received from your email</string>
     <string name="required">Required</string>
-    <string name="prompt">Choose a strong password to log in to your account. A strong password contains at least 1 digit, lower case letter, upper case letter and a special character.</string>
+    <string name="prompt">Create a strong password to log in to your account.</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

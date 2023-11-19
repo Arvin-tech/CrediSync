@@ -23,11 +23,11 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="200dp"
+        android:layout_width="240dp"
         android:layout_height="22dp"
         android:layout_gravity="start"
         android:fontFamily="@font/poppins_bold"
-        android:text="Account Details"
+        android:text="Step 1: Account Details"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"

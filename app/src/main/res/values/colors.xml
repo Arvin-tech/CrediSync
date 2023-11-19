@@ -16,7 +16,6 @@
 
     <!--status bar and hint text color-->
     <color name="light_gray">#A19D9D</color>
-    <color name="peach">#EFDCBB</color>
     <color name="peacher">#F0D6A5</color>
 
     <!--edit text background-->
@@ -30,10 +29,13 @@
     <color name="active">#ffd500</color>
 
     <!--button color-->
-    <color name="brown">#C9994A</color>
+    <color name="button">#E8BB4A</color>
     <color name="join">#D48809</color>
 
     <!--for checkmarks-->
     <color name="green">#18A900</color>
+
+    <!-- for bottom navigation -->
+    <color name="bottomnav">#F3ECD9</color>
 
 </resources>

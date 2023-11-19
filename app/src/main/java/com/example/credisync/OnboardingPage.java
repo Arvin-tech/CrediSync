@@ -19,7 +19,7 @@ import android.widget.TextView;
 public class OnboardingPage extends AppCompatActivity {
 
     Animation topAnimation;
-    ImageView logo; //credi sync logo
+    ImageView logo; //credisync logo
     protected static int SPLASH_SCREEN = 5000;
     protected AppCompatButton loginButton, signupButton;
 
@@ -30,7 +30,7 @@ public class OnboardingPage extends AppCompatActivity {
         setContentView(R.layout.activity_onboarding_page);
 
         findViewById(); //reference to ui elements
-        setStatusBarColor(getResources().getColor(R.color.light_gray));
+        setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color
 
         topAnimation = AnimationUtils.loadAnimation(this,R.anim.top_anim); //find xml
         logo = findViewById(R.id.imageView2);
