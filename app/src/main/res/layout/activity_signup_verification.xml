@@ -39,7 +39,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
-        android:text="Please enter the code that we have sent to your email to complete the signup process"
+        android:text="Please enter the code that we have sent to your email to complete the signup process."
         android:textColor="@color/black"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -56,12 +56,13 @@
         android:fontFamily="@font/montserrat_bold"
         android:text="testemailaddress123@gmail.com"
         android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.532" />
+        app:layout_constraintVertical_bias="0.529" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
