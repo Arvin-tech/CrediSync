@@ -35,6 +35,7 @@
     <!--for checkmarks-->
     <color name="green">#18A900</color>
 
+    <!-- for bottom navigation -->
     <color name="bottomnav">#F3ECD9</color>
 
 </resources>
