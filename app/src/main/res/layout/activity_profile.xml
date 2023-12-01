@@ -34,6 +34,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="24dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="Personal Information"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.314" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="140dp"
@@ -66,7 +81,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.315">
+        app:layout_constraintVertical_bias="0.381">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/firstNameLayout"
@@ -77,18 +92,19 @@
             android:visibility="visible"
             app:errorEnabled="true"
             app:helperTextEnabled="true"
+            app:hintEnabled="false"
             app:startIconDrawable="@drawable/baseline_person_24"
-            app:startIconTint="@color/black"
-            app:hintEnabled="false">
+            app:startIconTint="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/firstNameEditTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_round"
-                android:padding="12dp"
+                android:hint="Firstname"
                 android:fontFamily="@font/poppins_regular"
                 android:inputType="text|textEmailAddress"
+                android:padding="12dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/light_gray" />
 
@@ -103,18 +119,19 @@
             android:visibility="visible"
             app:errorEnabled="true"
             app:helperTextEnabled="true"
+            app:hintEnabled="false"
             app:startIconDrawable="@drawable/baseline_person_24"
-            app:startIconTint="@color/black"
-            app:hintEnabled="false">
+            app:startIconTint="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/lastNameEditTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_round"
-                android:padding="12dp"
+                android:hint="Lastname"
                 android:fontFamily="@font/poppins_regular"
                 android:inputType="text|textEmailAddress"
+                android:padding="12dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/light_gray" />
 
@@ -146,6 +163,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_round"
+            android:hint="Address"
             android:fontFamily="@font/poppins_regular"
             android:inputType="text|textEmailAddress"
             android:padding="12dp"
@@ -177,6 +195,7 @@
             android:id="@+id/phoneEditTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Contact Number"
             android:background="@drawable/edit_round"
             android:fontFamily="@font/poppins_regular"
             android:inputType="text|textEmailAddress"
@@ -211,6 +230,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_round"
+            android:hint="Birthdate"
             android:fontFamily="@font/poppins_regular"
             android:inputType="text|textEmailAddress"
             android:padding="12dp"
