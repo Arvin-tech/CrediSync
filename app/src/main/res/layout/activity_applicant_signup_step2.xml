@@ -155,10 +155,10 @@
             android:background="@drawable/edit_round"
             android:fontFamily="@font/poppins_regular"
             android:hint="Birthdate"
+            android:inputType="phone"
             android:padding="5dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/light_gray"
-            android:inputType="phone" />
+            android:textColorHint="@color/light_gray" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
