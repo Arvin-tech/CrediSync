@@ -59,4 +59,5 @@ dependencies {
     implementation 'com.google.android.material:material:x.y.z'
     implementation "androidx.compose.material3:material3:1.1.2" // Material Design 3
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+
 }

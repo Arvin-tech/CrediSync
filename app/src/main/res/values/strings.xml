@@ -1,12 +1,5 @@
 <resources>
     <string name="app_name">CrediSync</string>
-
-    <!--Facebook integration-->
-    <string name="facebook_app_id">2060351007632875</string>
-    <string name="facebook_client_token">1b295fa9c268b4d95d7f3326b4cf946e</string>
-    <string name="fb_login_protocol_scheme">fb1234</string>
-
-
     <string name="choose">Choose file</string>
     <string name="upload">Upload</string>
 
