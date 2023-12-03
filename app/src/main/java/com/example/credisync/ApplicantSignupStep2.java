@@ -36,10 +36,10 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
 
     protected final String TAG = this.getClass().getName(); //tag argument is the tag of the message,  msg argument is the message to display on the Logcat
     protected static final Pattern PHONE_PATTERN = Pattern.compile("09[0-9]{9}"); //philippine format? 09 prefix yarn
-    protected EditText firstNameTxt, lastNameTxt, phoneTxt, birthTxt;
+    protected EditText firstNameTxt, lastNameTxt, memberIdTxt, coopTxt, phoneTxt, birthTxt;
     protected TextInputLayout firstNameLayout, lastNameLayout, phoneLayout;
     protected AppCompatButton signUp;
-    protected String inputtedFirstName, inputtedLastName, inputtedPhone, inputtedBirthdate; //input variables for this activity/page
+    protected String inputtedFirstName, inputtedLastName, inputtedMemberId, inputtedCoop, inputtedPhone, inputtedBirthdate; //input variables for this activity/page
     protected FirebaseFirestore db; //cloud fire store
     protected Map<String, Object> user; //used to save user details
     protected Calendar calendar = Calendar.getInstance();
@@ -47,7 +47,7 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     protected String currentDate = simpleDateFormat.format(calendar.getTime()); //or currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
     protected int redColor = Color.parseColor("#FF0000");
     protected DatePickerDialog.OnDateSetListener setListener;
-    protected String getEmail, getUserPassword; //variables used to get data from applicant signup activity
+    protected String getEmail, getUserPassword; //variables used to get data from applicant signup activity (step 1)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        /**
         birthTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,25 +91,31 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
                 birthTxt.setText(date);
             }
         };
+        **/
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 inputtedFirstName = firstNameTxt.getText().toString();
                 inputtedLastName = lastNameTxt.getText().toString();
+                inputtedMemberId = memberIdTxt.getText().toString();
+                inputtedCoop = coopTxt.getText().toString();
                 inputtedPhone = phoneTxt.getText().toString();
-                inputtedBirthdate = birthTxt.getText().toString();
+                //inputtedBirthdate = birthTxt.getText().toString();
 
-                //send email, password, firstname, lastname, phone and birthdate to signup verification
+                //send email, password, firstname, lastname, member id, coop, phone and birthdate to signup verification
                 Intent intent = new Intent(getApplicationContext(), SignupVerification.class);
                 intent.putExtra("emailData", getEmail);
                 intent.putExtra("passwordData", getUserPassword);
-                //intent.putExtra("confirmData", getUserConfirmPassword);
-
                 intent.putExtra("firstnameData", inputtedFirstName);
                 intent.putExtra("lastnameData", inputtedLastName);
+                intent.putExtra("memberIdData", inputtedMemberId);
+                intent.putExtra("coopData", inputtedCoop);
                 intent.putExtra("contactData", inputtedPhone);
-                intent.putExtra("birthdateData", inputtedBirthdate);
+                //intent.putExtra("birthdateData", inputtedBirthdate);
+
+                // Start the SignupVerification activity
+                startActivity(intent);
             }
         });
     }
@@ -130,9 +137,11 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     protected  void findViewById(){
         firstNameTxt = (EditText) findViewById(R.id.firstNameEditTxt);
         lastNameTxt = (EditText) findViewById(R.id.lastNameEditTxt);
+        memberIdTxt = (EditText) findViewById(R.id.memberIdEditTxt);
+        coopTxt = (EditText) findViewById(R.id.memberCoopEditTxt);
         phoneTxt = (EditText) findViewById(R.id.phoneEditTxt);
         signUp = (AppCompatButton) findViewById(R.id.buttonSignup);
-        birthTxt = (EditText) findViewById(R.id.birthdateTxt);
+        //birthTxt = (EditText) findViewById(R.id.birthdateTxt);
     }
 
     protected void inputListeners(){

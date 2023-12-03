@@ -33,6 +33,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--Home page headings-->
+    <string name="heading_one">Discover Pet Care Excellence</string>
+    <string name="heading_two">Elevate Your Pet\'s Outdoor Adventures</string>
+    <string name="heading_three">Connect with a Pet-Loving Community</string>
+
+    <!--Home page slider descriptions-->
+    <string name="desc_one">Tailored pet care at your fingertips</string>
+    <string name="desc_two">Simplify pet care with our app.</string>
+    <string name="desc_three">A world of pet care in one app</string>
+
     <!--For icons-->
     <string name="dashboard">Dashboard</string>
     <string name="score">Credit Score</string>

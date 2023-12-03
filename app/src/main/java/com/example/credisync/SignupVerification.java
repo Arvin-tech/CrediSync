@@ -3,14 +3,19 @@ package com.example.credisync;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.telephony.SmsManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -25,10 +30,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,8 +59,6 @@ public class SignupVerification extends AppCompatActivity {
     protected boolean resendEnabled = false; //true after every 60 seconds
     protected int resendTime = 60; //in seconds
     protected int selectedETPosition = 0;
-    protected int code = generateCode(); //get the generated code
-
     protected Map<String, Object> user; //used to save user details
     protected int accountNumber = generateAccountNumber();
     protected String getEmail, getUserPassword, getFirstname, getLastName, getContact, getBirthdate; //variable to receive data from applicant signup & applicant signup step 2
@@ -63,6 +66,62 @@ public class SignupVerification extends AppCompatActivity {
     protected SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //year month date -- hour minute seconds
     protected String currentDate = simpleDateFormat.format(calendar.getTime()); //or currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
     protected FirebaseFirestore db; //cloud fire store
+    protected int code = generateCode(); //get the generated code
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_signup_verification);
+
+        db = FirebaseFirestore.getInstance();
+        setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color resendTextview
+
+        findViewById(); //reference to ui elements
+        resendTxt.setPaintFlags(resendTxt.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG); //underline resend code text
+        getSignupStep2Data(); //grab data from step signup step 2
+        checkSelfPermission(); //check permissions and send verification code
+
+        otpTextWatcher();
+        showKeyboard(otpTxt1);
+        startCountDownTimer();
+
+        //click verify button
+        verifyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String generateOtp = otpTxt1.getText().toString()+otpTxt2.getText().toString()+otpTxt3.getText().toString()+otpTxt4.getText().toString();
+                if(generateOtp.length()==4){
+
+                    int enteredCode;
+                    try{
+                        enteredCode = Integer.parseInt(generateOtp);
+                    }
+                    catch(NumberFormatException e){
+                        return;
+                    }
+                    //validate entered code
+                    if(enteredCode == code){
+                        saveToFirebase();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Incorrect verification code",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        //click resend text view
+        resendTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(resendEnabled){
+                    //resend code here
+                    //sendVerificationCode(getEmail);
+                    startCountDownTimer(); //start new resend count down timer
+                }
+            }
+        });
+    }
 
     protected final TextWatcher textWatcher = new TextWatcher() {
         private static final int MAX_EDIT_TEXT_INPUT_LENGTH = 1; //input limit per edit text
@@ -100,62 +159,46 @@ public class SignupVerification extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup_verification);
-
-        db = FirebaseFirestore.getInstance();
-        setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color resendTextview
-
-        findViewById(); //reference to ui elements
-        resendTxt.setPaintFlags(resendTxt.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
-        getSignupStep2Data();
-
-        sendVerificationCode(getEmail); //pass the email from applicant signup as parameter
-
-        otpTextWatcher();
-        showKeyboard(otpTxt1);
-        startCountDownTimer();
-
-        //click verify button
-        verifyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String generateOtp = otpTxt1.getText().toString()+otpTxt2.getText().toString()+otpTxt3.getText().toString()+otpTxt4.getText().toString();
-                if(generateOtp.length()==4){
-
-                    int enteredCode;
-                    try{
-                        enteredCode = Integer.parseInt(generateOtp);
-                    }
-                    catch(NumberFormatException e){
-                        return;
-                    }
-                    //validate entered code
-                    if(enteredCode == code){
-                        saveToFirebase();
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(), "Incorrect verification code",Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
-
-        //click resend text view
-        resendTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(resendEnabled){
-                    //resend code here
-                    sendVerificationCode(getEmail);
-                    startCountDownTimer(); //start new resend count down timer
-                }
-            }
-        });
+    //generated otp code
+    private int generateCode() {
+        final int minCode = 1000; // 4-digit numbers start from 1000
+        final int maxCode = 9999; // 4-digit numbers end at 9999
+        Random random = new Random();
+        return random.nextInt(maxCode - minCode + 1) + minCode;
     }
 
+    //check manifest permissions
+    protected void checkSelfPermission(){
+        String permissionStr = "android.permission.SEND_SMS";
+
+        if(ContextCompat.checkSelfPermission(SignupVerification.this, permissionStr) == PackageManager.PERMISSION_GRANTED){
+            sendVerificationCode();
+        }else{
+            ActivityCompat.requestPermissions(SignupVerification.this, new String[]{permissionStr}, 100);
+        }
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == 100){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                sendVerificationCode();
+            }else{
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    //send verification code sms
+    protected void sendVerificationCode(){
+        SmsManager smsManager = SmsManager.getDefault();
+        ArrayList<String> parts = smsManager.divideMessage("Your CrediSync account verification code is: "+code);
+        String phoneNumber = getContact; //send to the inputted phone number in signup step 2
+        smsManager.sendMultipartTextMessage(phoneNumber, null,parts,null,null);
+    }
+
+    //grab data from step 2 when this activity start
     protected void getSignupStep2Data(){
         getEmail = getIntent().getStringExtra("emailData"); //receive email from applicant signup activity
         emailTxt.setText(getEmail); //set the text view in xml into the email from applicant signup\
@@ -169,6 +212,7 @@ public class SignupVerification extends AppCompatActivity {
 
     }
 
+    //redirect to login if verified
     protected void redirectLoginActivity(){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
@@ -226,13 +270,7 @@ public class SignupVerification extends AppCompatActivity {
         resendTxt = (TextView) findViewById(R.id.resendTextview); //resend code
     }
 
-    private int generateCode() {
-        final int minCode = 1000; // 4-digit numbers start from 1000
-        final int maxCode = 9999; // 4-digit numbers end at 9999
-        Random random = new Random();
-        return random.nextInt(maxCode - minCode + 1) + minCode;
-    }
-
+    //generated account number
     protected int generateAccountNumber() {
         final int minCode = 10000000; // 8-digit numbers start from 100000
         final int maxCode = 99999999; // 8-digit numbers end at 999999
@@ -243,7 +281,7 @@ public class SignupVerification extends AppCompatActivity {
     //this method creates a user account and save details to firebase
     protected void saveToFirebase(){
         user = new HashMap<>();
-        user.put("Applicant ID", accountNumber); //generated account number
+        user.put("LA_ID", accountNumber); //generated account number
 
         //data from Step1
         user.put("LA_EmailAddress", getEmail);
