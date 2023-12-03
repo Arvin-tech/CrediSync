@@ -225,7 +225,6 @@ public class ForgotPassword extends AppCompatActivity {
                 "\n" +
                 "Your Beta App Developers team";
         try {
-            //get it from values> emails.xml
             String senderEmail = getString(R.string.smtp_email);
             String senderPassword = getString(R.string.smtp_password);
             String receiverEmail = recipientEmail;

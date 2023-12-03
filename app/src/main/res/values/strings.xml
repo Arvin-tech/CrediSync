@@ -16,7 +16,7 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="email">Email</string>
-    <string name="phone">Contact Number</string>
+    <string name="phone">Contact Number (09)</string>
     <string name="password">Password</string>
     <string name="confirm">Confirm Password</string>
     <string name="reset">Reset Password</string>
@@ -28,11 +28,6 @@
     <string name="enter_code">Enter the reset code you received from your email</string>
     <string name="required">Required</string>
     <string name="prompt">Create a strong password to log in to your account.</string>
-
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
     <!--For icons-->
     <string name="dashboard">Dashboard</string>

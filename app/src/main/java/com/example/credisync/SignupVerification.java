@@ -1,5 +1,7 @@
 package com.example.credisync;
 
+import static java.lang.ref.Cleaner.create;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -40,15 +42,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+//import com.twilio.Twilio;
+//import com.twilio.rest.api.v2010.account.Message;
+//import com.twilio.type.PhoneNumber;
 
 public class SignupVerification extends AppCompatActivity {
 
@@ -67,11 +63,13 @@ public class SignupVerification extends AppCompatActivity {
     protected String currentDate = simpleDateFormat.format(calendar.getTime()); //or currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
     protected FirebaseFirestore db; //cloud fire store
     protected int code = generateCode(); //get the generated code
-
+    //protected final String ACCOUNT_SID = getString(R.string.ACCOUNT_SD);
+    //protected final String AUTH_TOKEN = getString(R.string.AUTH_TOKEN);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_verification);
+        //Twilio.init(ACCOUNT_SID, AUTH_TOKEN); //initialize twilio
 
         db = FirebaseFirestore.getInstance();
         setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color resendTextview
@@ -79,6 +77,7 @@ public class SignupVerification extends AppCompatActivity {
         findViewById(); //reference to ui elements
         resendTxt.setPaintFlags(resendTxt.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG); //underline resend code text
         getSignupStep2Data(); //grab data from step signup step 2
+        //sendTwilioSms();
         checkSelfPermission(); //check permissions and send verification code
 
         otpTextWatcher();
@@ -116,7 +115,8 @@ public class SignupVerification extends AppCompatActivity {
             public void onClick(View view) {
                 if(resendEnabled){
                     //resend code here
-                    //sendVerificationCode(getEmail);
+                    //sendTwilioSms();
+                    sendVerificationCode(getContact);
                     startCountDownTimer(); //start new resend count down timer
                 }
             }
@@ -172,7 +172,7 @@ public class SignupVerification extends AppCompatActivity {
         String permissionStr = "android.permission.SEND_SMS";
 
         if(ContextCompat.checkSelfPermission(SignupVerification.this, permissionStr) == PackageManager.PERMISSION_GRANTED){
-            sendVerificationCode();
+            sendVerificationCode(getContact);
         }else{
             ActivityCompat.requestPermissions(SignupVerification.this, new String[]{permissionStr}, 100);
         }
@@ -183,7 +183,7 @@ public class SignupVerification extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode == 100){
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                sendVerificationCode();
+                sendVerificationCode(getContact);
             }else{
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
@@ -191,12 +191,22 @@ public class SignupVerification extends AppCompatActivity {
     }
 
     //send verification code sms
-    protected void sendVerificationCode(){
+    protected void sendVerificationCode(String phoneNumber) {
         SmsManager smsManager = SmsManager.getDefault();
-        ArrayList<String> parts = smsManager.divideMessage("Your CrediSync account verification code is: "+code);
-        String phoneNumber = getContact; //send to the inputted phone number in signup step 2
-        smsManager.sendMultipartTextMessage(phoneNumber, null,parts,null,null);
+        ArrayList<String> parts = smsManager.divideMessage("Your CrediSync account verification code is: " + code);
+        smsManager.sendMultipartTextMessage(phoneNumber, null, parts, null, null);
     }
+
+    /**
+    //send verification code to user - this is an outbound sms
+    protected void sendTwilioSms(){
+        Message message = Message.creator(
+                new PhoneNumber(getString(R.string.TWILIO_PHONE)), new PhoneNumber(getContact),
+                "Your CrediSync account verification code is: "+code).create();
+
+        // Log the SID of the sent message
+        Log.d("TwilioSMS", "Message SID: " + message.getSid());
+    }**/
 
     //grab data from step 2 when this activity start
     protected void getSignupStep2Data(){
@@ -315,6 +325,7 @@ public class SignupVerification extends AppCompatActivity {
                 });
     }
 
+    /**
     protected void sendVerificationCode(String recipientEmail) {
         //email contents
         String subject = "Verify Your Account - Welcome to CrediSync!";
@@ -330,7 +341,6 @@ public class SignupVerification extends AppCompatActivity {
                 "The CrediSync Team";
 
         try {
-            //get it from values> emails.xml
             String senderEmail = getString(R.string.smtp_email); //emails xml
             String senderPassword = getString(R.string.smtp_password); //emails xml
             String receiverEmail = recipientEmail;
@@ -372,6 +382,7 @@ public class SignupVerification extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+     **/
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
