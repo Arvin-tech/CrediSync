@@ -42,6 +42,16 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 //import com.twilio.Twilio;
 //import com.twilio.rest.api.v2010.account.Message;
 //import com.twilio.type.PhoneNumber;
@@ -77,6 +87,8 @@ public class SignupVerification extends AppCompatActivity {
         findViewById(); //reference to ui elements
         resendTxt.setPaintFlags(resendTxt.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG); //underline resend code text
         getSignupStep2Data(); //grab data from step signup step 2
+        emailTxt.setText(getContact); //phone number of user
+
         //sendTwilioSms();
         checkSelfPermission(); //check permissions and send verification code
 
@@ -116,7 +128,7 @@ public class SignupVerification extends AppCompatActivity {
                 if(resendEnabled){
                     //resend code here
                     //sendTwilioSms();
-                    sendVerificationCode(getContact);
+                    checkSelfPermission();
                     startCountDownTimer(); //start new resend count down timer
                 }
             }
@@ -313,6 +325,7 @@ public class SignupVerification extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + getEmail);
                         redirectLoginActivity();
+                        sendConfirmationEmail(getEmail); //send confirmation email to user
                         Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -325,18 +338,15 @@ public class SignupVerification extends AppCompatActivity {
                 });
     }
 
-    /**
-    protected void sendVerificationCode(String recipientEmail) {
+    protected void sendConfirmationEmail(String recipientEmail) {
         //email contents
-        String subject = "Verify Your Account - Welcome to CrediSync!";
-        String body = "Dear "+getFirstname+",\n\n" +
-                "Thank you for signing up with CrediSync  To complete the registration process, " +
-                "please use the following verification code:\n\n" +
-                "Verification Code: " +code+ "\n\n" +
-                "Please enter this code on the verification page to activate your account. " +
-                "This step ensures that you have provided a valid email address and helps us maintain the security of your account.\n\n" +
-                "If you didn't sign up for CrediSync or you think you received this email by mistake, please ignore this email.\n\n" +
-                "If you have any questions or needs, please don't hesitate to contact our support team at credisync@gmail.com " +
+        String subject = "CrediSync Account Confirmation!";
+        String body = "Dear " + getFirstname + ",\n\n" +
+                "Welcome to CrediSync! We're thrilled to have you on board. " +
+                "Your account has been successfully created, and we can't wait for you to explore all the exciting features.\n\n" +
+                "If you didn't sign up for our app or received this email in error, please disregard it.\n\n" +
+                "Should you encounter any issues or have questions, feel free to reach out to our support team at support @ credisync@gmail.com\n\n" +
+                "We're excited to have you as part of our community!\n\n" +
                 "Best regards,\n\n" +
                 "The CrediSync Team";
 
@@ -382,7 +392,6 @@ public class SignupVerification extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-     **/
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
