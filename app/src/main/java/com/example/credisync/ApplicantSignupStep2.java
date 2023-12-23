@@ -18,6 +18,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,10 +38,10 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
 
     protected final String TAG = this.getClass().getName(); //tag argument is the tag of the message,  msg argument is the message to display on the Logcat
     protected static final Pattern PHONE_PATTERN = Pattern.compile("09[0-9]{9}"); //philippine format? 09 prefix yarn
-    protected EditText firstNameTxt, lastNameTxt, memberIdTxt, coopTxt, phoneTxt, birthTxt;
-    protected TextInputLayout firstNameLayout, lastNameLayout, phoneLayout;
+    protected EditText firstNameTxt, lastNameTxt, coopTxt, memberIdTxt, addressTxt, phoneTxt, birthTxt;
+    protected TextInputLayout firstNameLayout, lastNameLayout, cooperativeLayout, memberIDLayout, addressLayout, phoneLayout, birthdateLayout;
     protected AppCompatButton signUp;
-    protected String inputtedFirstName, inputtedLastName, inputtedMemberId, inputtedCoop, inputtedPhone, inputtedBirthdate; //input variables for this activity/page
+    protected String inputtedFirstName, inputtedLastName, inputtedCoop, inputtedMemberId, inputtedAddress, inputtedPhone, inputtedBirthdate; //input variables for this activity/page
     protected FirebaseFirestore db; //cloud fire store
     protected Map<String, Object> user; //used to save user details
     protected Calendar calendar = Calendar.getInstance();
@@ -48,6 +50,8 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     protected int redColor = Color.parseColor("#FF0000");
     protected DatePickerDialog.OnDateSetListener setListener;
     protected String getEmail, getUserPassword; //variables used to get data from applicant signup activity (step 1)
+    protected ImageView validID_Image;
+    protected TextView fileNameTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +70,7 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        /**
+
         birthTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,31 +95,43 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
                 birthTxt.setText(date);
             }
         };
-        **/
+
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 inputtedFirstName = firstNameTxt.getText().toString();
                 inputtedLastName = lastNameTxt.getText().toString();
-                inputtedMemberId = memberIdTxt.getText().toString();
                 inputtedCoop = coopTxt.getText().toString();
+                inputtedMemberId = memberIdTxt.getText().toString();
+                inputtedAddress = addressTxt.getText().toString();
                 inputtedPhone = phoneTxt.getText().toString();
-                //inputtedBirthdate = birthTxt.getText().toString();
+                inputtedBirthdate = birthTxt.getText().toString();
 
-                //send email, password, firstname, lastname, member id, coop, phone and birthdate to signup verification
-                Intent intent = new Intent(getApplicationContext(), SignupVerification.class);
-                intent.putExtra("emailData", getEmail);
-                intent.putExtra("passwordData", getUserPassword);
-                intent.putExtra("firstnameData", inputtedFirstName);
-                intent.putExtra("lastnameData", inputtedLastName);
-                intent.putExtra("memberIdData", inputtedMemberId);
-                intent.putExtra("coopData", inputtedCoop);
-                intent.putExtra("contactData", inputtedPhone);
-                //intent.putExtra("birthdateData", inputtedBirthdate);
+                if(validateFirstName(inputtedFirstName) && validateLastName(inputtedLastName)
+                                                        && validateCooperativeName(inputtedCoop)
+                                                        && validateMemberId(inputtedMemberId)
+                                                        && validateAddress(inputtedAddress)
+                                                        && validatePhone(inputtedPhone)){
 
-                // Start the SignupVerification activity
-                startActivity(intent);
+                    //send email, password, firstname, lastname, member id, coop, phone and birthdate to signup verification
+                    Intent intent = new Intent(getApplicationContext(), SignupVerification.class);
+                    intent.putExtra("emailData", getEmail);
+                    intent.putExtra("passwordData", getUserPassword);
+                    intent.putExtra("firstnameData", inputtedFirstName);
+                    intent.putExtra("lastnameData", inputtedLastName);
+                    intent.putExtra("coopData", inputtedCoop);
+                    intent.putExtra("memberIdData", inputtedMemberId);
+                    intent.putExtra("addressData", inputtedAddress);
+                    intent.putExtra("contactData", inputtedPhone);
+                    intent.putExtra("birthdateData", inputtedBirthdate);
+
+                    // Start the SignupVerification activity
+                    startActivity(intent);
+                }else{
+
+                }
+
             }
         });
     }
@@ -123,6 +139,9 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     private void textWatchers() {
         firstNameTxt.addTextChangedListener(new FirstNameTextWatcher());
         lastNameTxt.addTextChangedListener(new LastNameTextWatcher());
+        coopTxt.addTextChangedListener(new CooperativeTextWatcher());
+        memberIdTxt.addTextChangedListener(new MembershipIdTextWatcher());
+        addressTxt.addTextChangedListener(new AddressTextWatcher());
         phoneTxt.addTextChangedListener(new PhoneTextWatcher());
     }
 
@@ -135,13 +154,17 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     }
 
     protected  void findViewById(){
+        //id of all ui elements in this activity
         firstNameTxt = (EditText) findViewById(R.id.firstNameEditTxt);
         lastNameTxt = (EditText) findViewById(R.id.lastNameEditTxt);
-        memberIdTxt = (EditText) findViewById(R.id.memberIdEditTxt);
         coopTxt = (EditText) findViewById(R.id.memberCoopEditTxt);
+        memberIdTxt = (EditText) findViewById(R.id.memberIdEditTxt);
+        addressTxt = (EditText) findViewById(R.id.addressLayout);
         phoneTxt = (EditText) findViewById(R.id.phoneEditTxt);
-        signUp = (AppCompatButton) findViewById(R.id.buttonSignup);
-        //birthTxt = (EditText) findViewById(R.id.birthdateTxt);
+        birthTxt = (EditText) findViewById(R.id.birthdateTxt);
+        validID_Image = (ImageView) findViewById(R.id.validIdImage); //click image view
+        fileNameTxt = (TextView) findViewById(R.id.fileNameTextview);
+        signUp = (AppCompatButton) findViewById(R.id.buttonSignup); //click button
     }
 
     protected void inputListeners(){
@@ -153,17 +176,7 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     protected void getSignupPageData(){
         getEmail = getIntent().getStringExtra("email"); //receive email from applicant signup activity
         getUserPassword = getIntent().getStringExtra("password");
-
-        /*
-        Bundle extras = getIntent().getExtras();
-        if(extras != null){
-            getEmail = extras.getString("email"); //key
-            getUserPassword = extras.getString("password"); //key
-            getUserConfirmPassword = extras.getString("confirm"); //key
-        }
-         */
     }
-
 
     protected void redirectLoginActivity(){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -182,14 +195,21 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     protected Boolean validateFirstName(String name){
         firstNameLayout = findViewById(R.id.firstNameLayout);
         firstNameTxt = firstNameLayout.getEditText();
-        if(name.isEmpty()){
-            firstNameTxt.requestFocus(); //cursor here
+
+        // Check if the name is empty
+        if (name.isEmpty()) {
             firstNameLayout.setError("First Name Required!");
             return false;
-        }
-        else{
-            firstNameLayout.setError(null);
-            return true;
+        } else {
+            // Check if the first name contains special characters or numeric values
+            Pattern pattern = Pattern.compile("^[a-zA-Z]*$"); // Only allow alphabets
+            if (!pattern.matcher(name).matches()) {
+                firstNameLayout.setError("Invalid characters in First Name!");
+                return false;
+            } else {
+                firstNameLayout.setError(null);
+                return true;
+            }
         }
     }
 
@@ -197,21 +217,74 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
         lastNameLayout = findViewById(R.id.lastNameLayout);
         lastNameTxt = lastNameLayout.getEditText();
         if (name.isEmpty()){
-            lastNameTxt.requestFocus(); //cursor here
             lastNameLayout.setError("Last Name Required!"); //red
             return false;
         }
         else{
-            lastNameLayout.setError(null); //no more red
+            // Check if the last name contains special characters or numeric values
+            Pattern pattern = Pattern.compile("^[a-zA-Z]*$"); // Only allow alphabets
+            if (!pattern.matcher(name).matches()) {
+                firstNameLayout.setError("Invalid characters in Last Name!");
+                return false;
+            } else {
+                lastNameLayout.setError(null); //no more red
+                return true;
+            }
+        }
+    }
+
+    //cooperative name
+    protected Boolean validateCooperativeName(String coopName){
+        cooperativeLayout = findViewById(R.id.memberCoopLayout);
+        coopTxt = cooperativeLayout.getEditText();
+        if(coopName.isEmpty()){
+            cooperativeLayout.setError("Cooperative Required!");
+            return false;
+        }else{
+            // Check if the first name contains special characters or numeric values
+            Pattern pattern = Pattern.compile("^[a-zA-Z]*$"); // Only allow alphabets
+            if (!pattern.matcher(coopName).matches()) {
+                cooperativeLayout.setError("Invalid Cooperative Name!");
+                return false;
+            } else {
+                cooperativeLayout.setError(null);
+                return true;
+            }
+        }
+    }
+
+    //cooperative member id
+    protected Boolean validateMemberId(String memberID){
+        memberIDLayout = findViewById(R.id.memberCoopLayout);
+        memberIdTxt = memberIDLayout.getEditText();
+        if(memberID.isEmpty()){
+            memberIDLayout.setError("Member ID required!");
+            return false;
+        }else{
+            memberIDLayout.setError(null);
             return true;
         }
     }
 
+    //home address
+    protected Boolean validateAddress(String address){
+        //can contain dash or numbers
+        addressLayout = findViewById(R.id.addressLayout);
+        addressTxt = addressLayout.getEditText();
+        if(address.isEmpty()){
+            addressLayout.setError("Address is required!");
+            return false;
+        } else{
+            addressLayout.setError(null);
+            return true;
+        }
+    }
+
+    //contact number
     protected Boolean validatePhone(String phone){
         phoneLayout = findViewById(R.id.phoneNumberLayout);
         phoneTxt = phoneLayout.getEditText();
         if(phone.isEmpty()){
-            phoneTxt.requestFocus(); //cursor here
             phoneLayout.setError("Phone number required!"); //red
             return false;
         }
@@ -247,6 +320,7 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
                 if (!inputtedFirstName.isEmpty()){
                     firstNameLayout.setError(null); //triggers when name edit text input not empty
                 }
+
             }
 
             @Override
@@ -291,8 +365,8 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     }
 
     //inner classes: text watchers used especially to limit input
-    private class FirstNameTextWatcher implements TextWatcher {
-        private static final int MAX_NAME_LENGTH = 20;
+    private static class FirstNameTextWatcher implements TextWatcher {
+        private static final int MAX_FIRSTNAME_LENGTH = 30;
 
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -305,15 +379,15 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            String name = editable.toString().trim();
-            if (name.length() > MAX_NAME_LENGTH) {
-                editable.replace(0, editable.length(), name.substring(0, MAX_NAME_LENGTH));
+            String firstname = editable.toString().trim();
+            if (firstname.length() > MAX_FIRSTNAME_LENGTH) {
+                editable.replace(0, editable.length(), firstname.substring(0, MAX_FIRSTNAME_LENGTH));
             }
         }
     }
 
-    private class LastNameTextWatcher implements TextWatcher {
-        private static final int MAX_NAME_LENGTH = 20;
+    private static class LastNameTextWatcher implements TextWatcher {
+        private static final int MAX_LASTNAME_LENGTH = 30;
 
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -326,14 +400,79 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            String name = editable.toString().trim();
-            if (name.length() > MAX_NAME_LENGTH) {
-                editable.replace(0, editable.length(), name.substring(0, MAX_NAME_LENGTH));
+            String lastname = editable.toString().trim();
+            if (lastname.length() > MAX_LASTNAME_LENGTH) {
+                editable.replace(0, editable.length(), lastname.substring(0, MAX_LASTNAME_LENGTH));
             }
         }
     }
 
-    private class PhoneTextWatcher implements TextWatcher {
+    private static class CooperativeTextWatcher implements TextWatcher{
+        private static final int MAX_COOPERATIVE_NAME_LENGTH = 30;
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            String coop = editable.toString().trim();
+            if (coop.length() > MAX_COOPERATIVE_NAME_LENGTH) {
+                editable.replace(0, editable.length(), coop.substring(0, MAX_COOPERATIVE_NAME_LENGTH));
+            }
+        }
+    }
+
+    private static class MembershipIdTextWatcher implements TextWatcher{
+        private static final int MAX_MEMBERSHIP_NO_LENGTH = 8;
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            String memberID = editable.toString().trim();
+            if (memberID.length() > MAX_MEMBERSHIP_NO_LENGTH) {
+                editable.replace(0, editable.length(), memberID.substring(0, MAX_MEMBERSHIP_NO_LENGTH));
+            }
+        }
+    }
+
+    private static class AddressTextWatcher implements TextWatcher{
+        private static final int MAX_ADDRESS_LENGTH = 50;
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            String address = editable.toString().trim();
+            if (address.length() > MAX_ADDRESS_LENGTH) {
+                editable.replace(0, editable.length(), address.substring(0, MAX_ADDRESS_LENGTH));
+            }
+        }
+    }
+
+    private static class PhoneTextWatcher implements TextWatcher {
         private static final int MAX_PHONE_LENGTH = 11;
 
         @Override

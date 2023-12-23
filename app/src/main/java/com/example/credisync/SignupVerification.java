@@ -59,15 +59,14 @@ import javax.mail.internet.MimeMessage;
 public class SignupVerification extends AppCompatActivity {
 
     protected final String TAG = this.getClass().getName();
-    protected EditText otpTxt1, otpTxt2, otpTxt3, otpTxt4;
+    protected EditText otpTxt1, otpTxt2, otpTxt3, otpTxt4, otpTxt5, otpTxt6;
     protected TextView emailTxt, resendTxt;
     protected AppCompatButton verifyButton;
     protected boolean resendEnabled = false; //true after every 60 seconds
     protected int resendTime = 60; //in seconds
     protected int selectedETPosition = 0;
-    protected Map<String, Object> user; //used to save user details
     protected int accountNumber = generateAccountNumber();
-    protected String getEmail, getUserPassword, getFirstname, getLastName, getContact, getBirthdate; //variable to receive data from applicant signup & applicant signup step 2
+    protected String getEmail, getUserPassword, getFirstname, getLastName, getCooperative, getMembershipID, getAddress, getContact, getBirthdate; //variable to receive data from applicant signup & applicant signup step 2
     protected Calendar calendar = Calendar.getInstance();
     protected SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //year month date -- hour minute seconds
     protected String currentDate = simpleDateFormat.format(calendar.getTime()); //or currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
@@ -81,7 +80,7 @@ public class SignupVerification extends AppCompatActivity {
         setContentView(R.layout.activity_signup_verification);
         //Twilio.init(ACCOUNT_SID, AUTH_TOKEN); //initialize twilio
 
-        db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance(); //initialize fire store
         setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color resendTextview
 
         findViewById(); //reference to ui elements
@@ -100,8 +99,14 @@ public class SignupVerification extends AppCompatActivity {
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String generateOtp = otpTxt1.getText().toString()+otpTxt2.getText().toString()+otpTxt3.getText().toString()+otpTxt4.getText().toString();
-                if(generateOtp.length()==4){
+                final String generateOtp = otpTxt1.getText().toString()
+                                           +otpTxt2.getText().toString()
+                                           +otpTxt3.getText().toString()
+                                           +otpTxt4.getText().toString()
+                                           +otpTxt5.getText().toString()
+                                           +otpTxt6.getText().toString();
+
+                if(generateOtp.length()==6){
 
                     int enteredCode;
                     try{
@@ -167,16 +172,31 @@ public class SignupVerification extends AppCompatActivity {
                     selectedETPosition = 3;
                     showKeyboard(otpTxt4);
                 }
+                else if(selectedETPosition == 3){
+                    selectedETPosition = 4;
+                    showKeyboard(otpTxt5);
+                }
+                else if(selectedETPosition == 4){
+                    selectedETPosition = 5;
+                    showKeyboard(otpTxt6);
+                }
             }
         }
     };
 
     //generated otp code
     private int generateCode() {
-        final int minCode = 1000; // 4-digit numbers start from 1000
-        final int maxCode = 9999; // 4-digit numbers end at 9999
+        final int minCode = 100000; // 6-digit numbers start from 100000
+        final int maxCode = 999999; // 6-digit numbers end at 999999
         Random random = new Random();
         return random.nextInt(maxCode - minCode + 1) + minCode;
+    }
+
+    //send verification code sms
+    protected void sendVerificationCode(String phoneNumber) {
+        SmsManager smsManager = SmsManager.getDefault();
+        ArrayList<String> parts = smsManager.divideMessage("Your CrediSync account verification code is: " + code);
+        smsManager.sendMultipartTextMessage(phoneNumber, null, parts, null, null);
     }
 
     //check manifest permissions
@@ -202,13 +222,6 @@ public class SignupVerification extends AppCompatActivity {
         }
     }
 
-    //send verification code sms
-    protected void sendVerificationCode(String phoneNumber) {
-        SmsManager smsManager = SmsManager.getDefault();
-        ArrayList<String> parts = smsManager.divideMessage("Your CrediSync account verification code is: " + code);
-        smsManager.sendMultipartTextMessage(phoneNumber, null, parts, null, null);
-    }
-
     /**
     //send verification code to user - this is an outbound sms
     protected void sendTwilioSms(){
@@ -229,6 +242,9 @@ public class SignupVerification extends AppCompatActivity {
         //receive data from applicant signup step 2 : observe the keys
         getFirstname = getIntent().getStringExtra("firstnameData");
         getLastName = getIntent().getStringExtra("lastnameData");
+        getCooperative = getIntent().getStringExtra("coopData");
+        getMembershipID = getIntent().getStringExtra("memberIdData");
+        getAddress = getIntent().getStringExtra("addressData");
         getContact = getIntent().getStringExtra("contactData");
         getBirthdate = getIntent().getStringExtra("birthdateDate");
 
@@ -302,24 +318,50 @@ public class SignupVerification extends AppCompatActivity {
 
     //this method creates a user account and save details to firebase
     protected void saveToFirebase(){
-        user = new HashMap<>();
-        user.put("LA_ID", accountNumber); //generated account number
+        //refer to the ERD : hash map for users collection
+        Map<String, Object> users = new HashMap<>();
+        users.put("User_ID", accountNumber);
+        users.put("User_EmailAddress", getEmail);
+        users.put("User_Password", getUserPassword);
+        users.put("User_DateRegistered", currentDate); //sign up date
+        users.put("User_Type", "Loan Applicant"); //user type
 
+        //hashmap for loan applicants collection
+        Map<String, Object> loanApplicants = new HashMap<>();
+        loanApplicants.put("LA_ID", accountNumber); //generated account number
         //data from Step1
-        user.put("LA_EmailAddress", getEmail);
-        user.put("LA_Password", getUserPassword);
-
+        loanApplicants.put("LA_EmailAddress", getEmail);
+        loanApplicants.put("LA_Password", getUserPassword);
         //data from step 2
-        user.put("LA_FirstName", getFirstname);
-        user.put("LA_LastName", getLastName);
-        user.put("LA_ContactNo", getContact);
-        user.put("LA_Birthdate", getBirthdate);
-        user.put("LA_dateRegistered", currentDate);
+        loanApplicants.put("LA_FirstName", getFirstname);
+        loanApplicants.put("LA_LastName", getLastName);
+        loanApplicants.put("LA_Cooperative", getCooperative);
+        loanApplicants.put("LA_MembershipID", getMembershipID);
+        loanApplicants.put("LA_Address", getAddress);
+        loanApplicants.put("LA_ContactNo", getContact);
+        loanApplicants.put("LA_Birthdate", getBirthdate);
 
-        // Set the document ID as the inputted email
+        //user.put("LA_dateRegistered", currentDate); just put this in users collection/table
+        db.collection("Users")
+                .document()
+                .set(accountNumber)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
+        // Set the document ID as the inputted email (Loan Applicants collection)
         db.collection("Loan Applicants")
                 .document(getEmail)
-                .set(user)
+                .set(loanApplicants)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
