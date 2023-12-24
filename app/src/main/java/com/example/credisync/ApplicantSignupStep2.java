@@ -63,14 +63,14 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         findViewById(); //method that creates reference to ui elements
         textWatchers(); //for input lengths
-        inputListeners();
+        inputListeners(); //when inputs are not empty, set to null the error messages
         getSignupPageData(); //grab the data from step 1 as this activity starts
 
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-
+        /*
         birthTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +95,7 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
                 birthTxt.setText(date);
             }
         };
-
+         */
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +106,7 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
                 inputtedMemberId = memberIdTxt.getText().toString();
                 inputtedAddress = addressTxt.getText().toString();
                 inputtedPhone = phoneTxt.getText().toString();
-                inputtedBirthdate = birthTxt.getText().toString();
+                //inputtedBirthdate = birthTxt.getText().toString();
 
                 if(validateFirstName(inputtedFirstName) && validateLastName(inputtedLastName)
                                                         && validateCooperativeName(inputtedCoop)
@@ -159,7 +159,7 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
         lastNameTxt = (EditText) findViewById(R.id.lastNameEditTxt);
         coopTxt = (EditText) findViewById(R.id.memberCoopEditTxt);
         memberIdTxt = (EditText) findViewById(R.id.memberIdEditTxt);
-        addressTxt = (EditText) findViewById(R.id.addressLayout);
+        addressTxt = (EditText) findViewById(R.id.addressEditTxt);
         phoneTxt = (EditText) findViewById(R.id.phoneEditTxt);
         birthTxt = (EditText) findViewById(R.id.birthdateTxt);
         validID_Image = (ImageView) findViewById(R.id.validIdImage); //click image view
@@ -170,6 +170,9 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     protected void inputListeners(){
         firstNameInputListener();
         lastNameInputListener();
+        cooperativeInputListener();
+        membershipIdInputListener();
+        addressInputListener();
         phoneInputListener();
     }
 
@@ -198,12 +201,14 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
 
         // Check if the name is empty
         if (name.isEmpty()) {
+            firstNameLayout.setErrorTextColor(ColorStateList.valueOf(redColor));
             firstNameLayout.setError("First Name Required!");
             return false;
         } else {
             // Check if the first name contains special characters or numeric values
             Pattern pattern = Pattern.compile("^[a-zA-Z]*$"); // Only allow alphabets
             if (!pattern.matcher(name).matches()) {
+                firstNameLayout.setErrorTextColor(ColorStateList.valueOf(redColor));
                 firstNameLayout.setError("Invalid characters in First Name!");
                 return false;
             } else {
@@ -214,17 +219,20 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
     }
 
     protected Boolean validateLastName(String name){
+
         lastNameLayout = findViewById(R.id.lastNameLayout);
         lastNameTxt = lastNameLayout.getEditText();
+
         if (name.isEmpty()){
+            lastNameLayout.setErrorTextColor(ColorStateList.valueOf(redColor));
             lastNameLayout.setError("Last Name Required!"); //red
             return false;
-        }
-        else{
+        } else{
             // Check if the last name contains special characters or numeric values
             Pattern pattern = Pattern.compile("^[a-zA-Z]*$"); // Only allow alphabets
             if (!pattern.matcher(name).matches()) {
-                firstNameLayout.setError("Invalid characters in Last Name!");
+                lastNameLayout.setErrorTextColor(ColorStateList.valueOf(redColor));
+                lastNameLayout.setError("Invalid characters in Last Name!");
                 return false;
             } else {
                 lastNameLayout.setError(null); //no more red
@@ -235,15 +243,19 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
 
     //cooperative name
     protected Boolean validateCooperativeName(String coopName){
+
         cooperativeLayout = findViewById(R.id.memberCoopLayout);
         coopTxt = cooperativeLayout.getEditText();
+
         if(coopName.isEmpty()){
+            cooperativeLayout.setErrorTextColor(ColorStateList.valueOf(redColor));
             cooperativeLayout.setError("Cooperative Required!");
             return false;
         }else{
             // Check if the first name contains special characters or numeric values
             Pattern pattern = Pattern.compile("^[a-zA-Z]*$"); // Only allow alphabets
             if (!pattern.matcher(coopName).matches()) {
+                cooperativeLayout.setErrorTextColor(ColorStateList.valueOf(redColor));
                 cooperativeLayout.setError("Invalid Cooperative Name!");
                 return false;
             } else {
@@ -258,6 +270,7 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
         memberIDLayout = findViewById(R.id.memberCoopLayout);
         memberIdTxt = memberIDLayout.getEditText();
         if(memberID.isEmpty()){
+            memberIDLayout.setErrorTextColor(ColorStateList.valueOf(redColor));
             memberIDLayout.setError("Member ID required!");
             return false;
         }else{
@@ -272,6 +285,7 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
         addressLayout = findViewById(R.id.addressLayout);
         addressTxt = addressLayout.getEditText();
         if(address.isEmpty()){
+            addressLayout.setErrorTextColor(ColorStateList.valueOf(redColor));
             addressLayout.setError("Address is required!");
             return false;
         } else{
@@ -285,15 +299,17 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
         phoneLayout = findViewById(R.id.phoneNumberLayout);
         phoneTxt = phoneLayout.getEditText();
         if(phone.isEmpty()){
+            phoneLayout.setErrorTextColor(ColorStateList.valueOf(redColor));
             phoneLayout.setError("Phone number required!"); //red
             return false;
         }
         else if (phone.length() != 11){
-            phoneTxt.requestFocus(); //cursor here
+            phoneLayout.setErrorTextColor(ColorStateList.valueOf(redColor));
             phoneLayout.setError("Phone number must be 11 digits"); //red gihapon
             return false;
         }
         else if (!PHONE_PATTERN.matcher(phone).matches()){
+            phoneLayout.setErrorTextColor(ColorStateList.valueOf(redColor));
             phoneLayout.setError("Invalid Phone number"); //red gihapon
             return false;
         }
@@ -313,29 +329,121 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputtedFirstName = firstNameTxt.getText().toString().trim();
                 if (!inputtedFirstName.isEmpty()){
-                    firstNameLayout.setError(null); //triggers when name edit text input not empty
+                    firstNameLayout.setError(null); //triggers when first name not empty
                 }
-
             }
-
             @Override
             public void afterTextChanged(Editable s) {
 
             }
 
         });
-        firstNameLayout.setErrorTextColor(ColorStateList.valueOf(redColor));
+
     }
 
     private void lastNameInputListener() {
         lastNameLayout = findViewById(R.id.lastNameLayout);
         lastNameTxt = lastNameLayout.getEditText();
+        assert lastNameTxt != null;
 
+        lastNameTxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                inputtedLastName = lastNameTxt.getText().toString().trim();
+                if (!inputtedLastName.isEmpty()){
+                    lastNameLayout.setError(null); //triggers when last name not empty
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    protected void cooperativeInputListener(){
+        cooperativeLayout = findViewById(R.id.memberCoopLayout);
+        coopTxt = cooperativeLayout.getEditText();
+        assert coopTxt != null;
+        coopTxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                inputtedCoop = coopTxt.getText().toString().trim();
+                if (!inputtedCoop.isEmpty()){
+                    cooperativeLayout.setError(null); //triggers when cooperative not empty
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    protected void membershipIdInputListener(){
+        memberIDLayout = findViewById(R.id.memberIdLayout);
+        memberIdTxt = memberIDLayout.getEditText();
+        assert memberIdTxt != null;
+        memberIdTxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                inputtedMemberId = memberIdTxt.getText().toString().trim();
+                if (!inputtedMemberId.isEmpty()){
+                    memberIDLayout.setError(null); //triggers when membership id not empty
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    protected void addressInputListener(){
+        addressLayout = findViewById(R.id.addressLayout);
+        addressTxt = addressLayout.getEditText();
+        assert addressTxt != null;
+        addressTxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                inputtedAddress = addressTxt.getText().toString().trim();
+                if (!inputtedAddress.isEmpty()){
+                    addressLayout.setError(null); //triggers when address id not empty
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     protected void phoneInputListener(){
@@ -352,7 +460,7 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputtedPhone = phoneTxt.getText().toString().trim();
                 if (!inputtedPhone.isEmpty()){
-                    phoneLayout.setError(null); //triggers when name edit text input not empty
+                    phoneLayout.setError(null); //triggers when contact no not empty
                 }
             }
 
@@ -361,7 +469,6 @@ public class ApplicantSignupStep2 extends AppCompatActivity {
 
             }
         });
-        phoneLayout.setErrorTextColor(ColorStateList.valueOf(redColor));
     }
 
     //inner classes: text watchers used especially to limit input

@@ -263,11 +263,9 @@ public class SignupVerification extends AppCompatActivity {
     }
 
     protected void setStatusBarColor(int color) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(color);
-        }
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(color);
     }
 
     protected void startCountDownTimer(){
@@ -296,6 +294,8 @@ public class SignupVerification extends AppCompatActivity {
         otpTxt2.addTextChangedListener(textWatcher);
         otpTxt3.addTextChangedListener(textWatcher);
         otpTxt4.addTextChangedListener(textWatcher);
+        otpTxt5.addTextChangedListener(textWatcher);
+        otpTxt6.addTextChangedListener(textWatcher);
     }
 
     protected void findViewById(){
@@ -303,6 +303,8 @@ public class SignupVerification extends AppCompatActivity {
         otpTxt2 = (EditText) findViewById(R.id.otpET2);
         otpTxt3 = (EditText) findViewById(R.id.otpET3);
         otpTxt4 = (EditText) findViewById(R.id.otpET4);
+        otpTxt5 = (EditText) findViewById(R.id.otpET5);
+        otpTxt6 = (EditText) findViewById(R.id.otpET6);
         verifyButton = (AppCompatButton) findViewById(R.id.verifyButton);
         emailTxt = (TextView) findViewById(R.id.emailTextview); //email txt that will be replaced with inputted email from signup step 1
         resendTxt = (TextView) findViewById(R.id.resendTextview); //resend code
@@ -341,10 +343,9 @@ public class SignupVerification extends AppCompatActivity {
         loanApplicants.put("LA_ContactNo", getContact);
         loanApplicants.put("LA_Birthdate", getBirthdate);
 
-        //user.put("LA_dateRegistered", currentDate); just put this in users collection/table
         db.collection("Users")
-                .document()
-                .set(accountNumber)
+                .document(String.valueOf(accountNumber))
+                .set(users)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
