@@ -77,6 +77,8 @@ public class SignupVerification extends AppCompatActivity {
         findViewById(); //reference to ui elements
         resendTxt.setPaintFlags(resendTxt.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG); //underline resend code text
         getSignupStep2Data(); //grab data from step signup step 2
+        emailTxt.setText(getContact); //set text into the inputted contact number
+
         //sendTwilioSms();
         checkSelfPermission(); //check permissions and send verification code
 
