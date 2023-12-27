@@ -45,7 +45,9 @@ public class ApplicantHome extends AppCompatActivity {
                     replaceFragment(new DashboardFragment());
                 } else if (item.getItemId() == R.id.bottom_notification) {
                     replaceFragment(new NotificationsFragment());
-                } else if (item.getItemId() == R.id.bottom_profile) {
+                } else if(item.getItemId() == R.id.bottom_transactions){
+                    replaceFragment(new TransactionsFragment());
+                }else if (item.getItemId() == R.id.bottom_profile) {
                     replaceFragment(new ProfileFragment());
                 }
                 return true;

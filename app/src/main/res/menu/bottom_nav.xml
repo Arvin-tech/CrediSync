@@ -13,6 +13,11 @@
         android:icon="@drawable/baseline_notifications_24" />
 
     <item
+        android:id="@+id/bottom_transactions"
+        android:title=""
+        android:icon="@drawable/baseline_list_24" />
+
+    <item
         android:id="@+id/bottom_profile"
         android:title=""
         android:icon="@drawable/baseline_account_circle_24" />

@@ -23,6 +23,7 @@ public class ProfileFragment extends Fragment {
 
         findViewById(); //method call
 
+        /*
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -30,6 +31,7 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+         */
     }
 
     public void findViewById(){

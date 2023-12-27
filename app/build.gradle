@@ -62,4 +62,6 @@ dependencies {
 
     //implementation 'com.twilio.sdk:twilio:9.0.0' // Use the latest version available
 
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+
 }

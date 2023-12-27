@@ -100,7 +100,7 @@
         app:errorEnabled="true"
         app:hintEnabled="false"
         android:padding="5dp"
-        app:startIconDrawable="@drawable/baseline_groups_2_24"
+        app:startIconDrawable="@drawable/baseline_groups_24"
         app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText

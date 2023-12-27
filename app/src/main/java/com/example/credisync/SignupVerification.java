@@ -60,7 +60,7 @@ public class SignupVerification extends AppCompatActivity {
 
     protected final String TAG = this.getClass().getName();
     protected EditText otpTxt1, otpTxt2, otpTxt3, otpTxt4, otpTxt5, otpTxt6;
-    protected TextView emailTxt, resendTxt;
+    protected TextView phoneTxt, resendTxt;
     protected AppCompatButton verifyButton;
     protected boolean resendEnabled = false; //true after every 60 seconds
     protected int resendTime = 60; //in seconds
@@ -86,7 +86,7 @@ public class SignupVerification extends AppCompatActivity {
         findViewById(); //reference to ui elements
         resendTxt.setPaintFlags(resendTxt.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG); //underline resend code text
         getSignupStep2Data(); //grab data from step signup step 2
-        emailTxt.setText(getContact); //phone number of user
+        phoneTxt.setText(getContact); //phone number of user
 
         //sendTwilioSms();
         checkSelfPermission(); //check permissions and send verification code
@@ -236,7 +236,6 @@ public class SignupVerification extends AppCompatActivity {
     //grab data from step 2 when this activity start
     protected void getSignupStep2Data(){
         getEmail = getIntent().getStringExtra("emailData"); //receive email from applicant signup activity
-        emailTxt.setText(getEmail); //set the text view in xml into the email from applicant signup\
         getUserPassword = getIntent().getStringExtra("passwordData");
 
         //receive data from applicant signup step 2 : observe the keys
@@ -246,6 +245,7 @@ public class SignupVerification extends AppCompatActivity {
         getMembershipID = getIntent().getStringExtra("memberIdData");
         getAddress = getIntent().getStringExtra("addressData");
         getContact = getIntent().getStringExtra("contactData");
+        phoneTxt.setText(getContact); //set the text view in xml into the phone number from applicant signup\
         getBirthdate = getIntent().getStringExtra("birthdateDate");
 
     }
@@ -306,7 +306,7 @@ public class SignupVerification extends AppCompatActivity {
         otpTxt5 = (EditText) findViewById(R.id.otpET5);
         otpTxt6 = (EditText) findViewById(R.id.otpET6);
         verifyButton = (AppCompatButton) findViewById(R.id.verifyButton);
-        emailTxt = (TextView) findViewById(R.id.emailTextview); //email txt that will be replaced with inputted email from signup step 1
+        phoneTxt = (TextView) findViewById(R.id.phoneTextView); //email txt that will be replaced with inputted email from signup step 1
         resendTxt = (TextView) findViewById(R.id.resendTextview); //resend code
     }
 
