@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,10 +15,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.example.credisync.databinding.ActivityApplicantHomeBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 public class ApplicantHome extends AppCompatActivity {
 
@@ -24,45 +29,38 @@ public class ApplicantHome extends AppCompatActivity {
     protected static final String TAG = "HomeActivity";
     protected FirebaseFirestore db;
     protected SharedPreferences sharedPreferences; //storage mechanism used for auth/login purposes
-    ActivityApplicantHomeBinding binding; //binding is name of the class
+
+    private RecyclerView.Adapter adapterCoopList;
+    private RecyclerView recyclerViewCoop; //at dashboard fragment
+    protected TextView goodDay, points, creditScore, lastUpdated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityApplicantHomeBinding.inflate(getLayoutInflater()); //for fragments
-        setContentView(binding.getRoot()); //setContentView(R.layout.activity_home);
-        replaceFragment(new DashboardFragment()); //default view
-
-        setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color
-        db = FirebaseFirestore.getInstance(); //initialize fire store
-        sharedPreferences = getSharedPreferences("auth_data", Context.MODE_PRIVATE);
-        getUserDetails(); //grab the email
-
-        binding.bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.bottom_home) {
-                    replaceFragment(new DashboardFragment());
-                } else if (item.getItemId() == R.id.bottom_notification) {
-                    replaceFragment(new NotificationsFragment());
-                } else if(item.getItemId() == R.id.bottom_transactions){
-                    replaceFragment(new TransactionsFragment());
-                }else if (item.getItemId() == R.id.bottom_profile) {
-                    replaceFragment(new ProfileFragment());
-                }
-                return true;
-            }
-        });
+        initializeRecyclerView();
     }
 
-    protected void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Bundle bundle = new Bundle();
-        bundle.putString("userEmail", userEmail); // Pass the user's email to the fragment
-        fragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.frameLayout, fragment);
-        fragmentTransaction.commit();
+    protected void initializeRecyclerView() {
+
+        //place here coop details
+        ArrayList<CooperativesDomain> items = new ArrayList<>();
+
+        //add available coops (implement here from signup in firebase??) items from cooperatives collection in firebase??
+        items.add(new CooperativesDomain("Cebu CFI","Coop Bldg, Capitol Compound Road", "coopLogos"));
+        items.add(new CooperativesDomain("MAVENCO","Coop Bldg, Capitol Compound Road", "coopLogos"));
+        items.add(new CooperativesDomain("Coop Bank","Coop Bldg, Capitol Compound Road", "coopLogos"));
+        items.add(new CooperativesDomain("People's Coop","Coop Bldg, Capitol Compound Road", "coopLogos"));
+        items.add(new CooperativesDomain("Cebu People's","Coop Bldg, Capitol Compound Road", "coopLogos"));
+        items.add(new CooperativesDomain("Cebu CFI","Coop Bldg, Capitol Compound Road", "coopLogos"));
+
+        recyclerViewCoop = findViewById(R.id.dashboardRecyclerView); //find RecyclerView in the fragment's layout.
+        recyclerViewCoop.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        adapterCoopList = new CooperativesAdapter(items);
+        recyclerViewCoop.setAdapter(adapterCoopList);
+    }
+
+    protected void findViewById(){
+
     }
 
 

@@ -5,50 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backdrop"
-    tools:context=".Profile">
+    tools:context=".ProfileActivity">
 
-    <ImageView
-        android:id="@+id/backImage"
-        android:layout_width="20dp"
-        android:layout_height="50dp"
-        android:src="@drawable/baseline_arrow_back_ios_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.038"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.007" />
-
-    <TextView
-        android:id="@+id/titleTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Profile"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
-    <TextView
-        android:layout_width="250dp"
-        android:layout_height="24dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="Personal Information"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.217"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.314" />
-
+    <!-- Avatar -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="140dp"
@@ -59,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.122">
+        app:layout_constraintVertical_bias="0.059">
 
         <ImageView
             android:id="@+id/avatar"
@@ -71,205 +30,532 @@
 
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.381">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/firstNameLayout"
-            style="@style/AppTextInputLayout"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:visibility="visible"
-            app:errorEnabled="true"
-            app:helperTextEnabled="true"
-            app:hintEnabled="false"
-            app:startIconDrawable="@drawable/baseline_person_24"
-            app:startIconTint="@color/black">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/firstNameEditTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_round"
-                android:hint="Firstname"
-                android:fontFamily="@font/poppins_regular"
-                android:inputType="text|textEmailAddress"
-                android:padding="12dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/light_gray" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/lastNameLayout"
-            style="@style/AppTextInputLayout"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:visibility="visible"
-            app:errorEnabled="true"
-            app:helperTextEnabled="true"
-            app:hintEnabled="false"
-            app:startIconDrawable="@drawable/baseline_person_24"
-            app:startIconTint="@color/black">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/lastNameEditTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_round"
-                android:hint="Lastname"
-                android:fontFamily="@font/poppins_regular"
-                android:inputType="text|textEmailAddress"
-                android:padding="12dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/light_gray" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/addressLayout"
-        style="@style/AppTextInputLayout"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:visibility="visible"
-        app:errorEnabled="true"
-        app:helperTextEnabled="true"
-        app:hintEnabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0"
-        app:startIconDrawable="@drawable/baseline_location_on_24"
-        app:startIconTint="@color/black">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/addressEditTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_round"
-            android:hint="Address"
-            android:fontFamily="@font/poppins_regular"
-            android:inputType="text|textEmailAddress"
-            android:padding="12dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_gray" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneLayout"
-        style="@style/AppTextInputLayout"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:visibility="visible"
-        app:errorEnabled="true"
-        app:helperTextEnabled="true"
-        app:hintEnabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addressLayout"
-        app:layout_constraintVertical_bias="0.0"
-        app:startIconDrawable="@drawable/baseline_call_24"
-        app:startIconTint="@color/black">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneEditTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Contact Number"
-            android:background="@drawable/edit_round"
-            android:fontFamily="@font/poppins_regular"
-            android:inputType="text|textEmailAddress"
-            android:padding="12dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_gray" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/birthdateLayout"
-        style="@style/AppTextInputLayout"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:visibility="visible"
-        app:errorEnabled="true"
-        app:helperTextEnabled="true"
-        app:hintEnabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneLayout"
-        app:layout_constraintVertical_bias="0.0"
-        app:startIconDrawable="@drawable/baseline_calendar_month_24"
-        app:startIconTint="@color/black">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/birthdateTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_round"
-            android:hint="Birthdate"
-            android:fontFamily="@font/poppins_regular"
-            android:inputType="text|textEmailAddress"
-            android:padding="12dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_gray" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/verifyButton"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="68dp"
-        android:background="@drawable/button_bg"
-        android:fontFamily="@font/poppins_bold"
-        android:text="UPDATE"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthdateLayout"
-        app:layout_constraintVertical_bias="0.801" />
+    <!-- Firstname -->
 
     <TextView
-        android:id="@+id/deleteTxt"
+        android:id="@+id/firstNameTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
-        android:text="Delete Account"
-        android:textColor="@color/redtwo"
-        android:textSize="16dp"
-        android:textStyle="bold"
+        android:text="Firstname"
+        android:textColor="@color/black"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/verifyButton"
-        app:layout_constraintVertical_bias="0.271" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.248">
+
+    </TextView>
+
+    <!-- Email Address -->
+
+    <TextView
+        android:id="@+id/emailTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:text="emailadrres@email.com"
+        android:textColor="@color/button"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.293">
+
+    </TextView>
+
+    <!-- Settings Label -->
+
+    <TextView
+        android:id="@+id/settingsTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Settings"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.36" />
+
+    <!-- Change Password-->
+
+    <LinearLayout
+        android:id="@+id/changePasswordLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsTxt"
+        app:layout_constraintVertical_bias="0.03">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:src="@drawable/password" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Change Password"
+            android:textColor="@color/black"
+            android:textSize="17dp" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="131dp"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </LinearLayout>
+
+    <!-- Transaction History-->
+
+    <LinearLayout
+        android:id="@+id/transactionHistoryLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changePasswordLinearLayout"
+        app:layout_constraintVertical_bias="0.04">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:src="@drawable/checklist" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Transaction History"
+            android:textColor="@color/black"
+            android:textSize="17dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="123dp"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </LinearLayout>
+
+    <!-- Credit Reports-->
+
+    <LinearLayout
+        android:id="@+id/creditReportsLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transactionHistoryLinearLayout"
+        app:layout_constraintVertical_bias="0.002">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:src="@drawable/linechartfile" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Credit Reports"
+            android:textColor="@color/black"
+            android:textSize="17dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="165dp"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </LinearLayout>
+
+    <!-- Credit Help-->
+
+    <LinearLayout
+        android:id="@+id/creditHelpLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creditReportsLinearLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:src="@drawable/help" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Credit Help"
+            android:textColor="@color/black"
+            android:textSize="17dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="190dp"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </LinearLayout>
+
+    <!-- Feedback -->
+
+    <LinearLayout
+        android:id="@+id/feedbackLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creditHelpLinearLayout"
+        app:layout_constraintVertical_bias="0.003">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:src="@drawable/topic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Provide Feedback"
+            android:textColor="@color/black"
+            android:textSize="17dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="132dp"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </LinearLayout>
+
+    <!-- Terms and Conditions -->
+
+    <LinearLayout
+        android:id="@+id/termsConditionsLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creditHelpLinearLayout"
+        app:layout_constraintVertical_bias="0.136">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ok" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Terms and Conditions"
+            android:textColor="@color/black"
+            android:textSize="17dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="96dp"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </LinearLayout>
+
+    <!-- Privacy -->
+
+    <LinearLayout
+        android:id="@+id/privacyLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termsConditionsLinearLayout"
+        app:layout_constraintVertical_bias="0.004">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:src="@drawable/info" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Privacy Policy"
+            android:textColor="@color/black"
+            android:textSize="17dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="169dp"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </LinearLayout>
+
+    <!-- About -->
+
+    <LinearLayout
+        android:id="@+id/aboutLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/privacyLinearLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:src="@drawable/info" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="About"
+            android:textColor="@color/black"
+            android:textSize="17dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="235dp"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </LinearLayout>
+
+    <!-- Delete Account-->
+
+    <LinearLayout
+        android:id="@+id/deleteAccountLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutLinearLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:src="@drawable/denied" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Delete Account"
+            android:textColor="@color/red"
+            android:textSize="17dp" />
+
+    </LinearLayout>
+
+    <!-- Logout -->
+
+    <LinearLayout
+        android:id="@+id/logoutLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteAccountLinearLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:src="@drawable/logout" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Logout"
+            android:textColor="@color/red"
+            android:textSize="17dp" />
+
+    </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoutLinearLayout"
+        app:layout_constraintVertical_bias="1.0">
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            app:backgroundTint="@color/bottomnav">
+
+            <!--dashboard home-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/baseline_home_24" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Home"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/baseline_notifications_24" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Notifications"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/baseline_list_24" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Transactions"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/baseline_account_circle_24" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Profile"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
