@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backdrop"
     tools:context=".TransactionsActivity">
 
     <ScrollView
@@ -36,48 +37,53 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/homeMenuLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="20dp"
+                        android:layout_width="50dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/baseline_home_24"/>
+                        android:src="@drawable/ioshomeoutlined"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Home"
+                        android:textColor="@color/black"
                         android:textAlignment="center"/>
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/notifMenuLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="20dp"
+                        android:layout_width="50dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/baseline_notifications_24"/>
+                        android:src="@drawable/iosnotifoutlined"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Notifications"
+                        android:textColor="@color/black"
                         android:textAlignment="center"/>
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/transactionsMenuLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -88,17 +94,19 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/baseline_list_24"/>
+                        android:src="@drawable/ioshistoryfilled"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Transactions"
+                        android:textColor="@color/bottomnavtexts"
                         android:textAlignment="center"/>
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/profileMenuLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -110,12 +118,13 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/baseline_account_circle_24"/>
+                        android:src="@drawable/iosprofileoutlined"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Home"
+                        android:text="Profile"
+                        android:textColor="@color/black"
                         android:textAlignment="center"/>
 
                 </LinearLayout>

@@ -27,7 +27,7 @@ public class CooperativesAdapter extends RecyclerView.Adapter<CooperativesAdapte
     @NonNull
     @Override
     public CooperativesAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflater = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_coops_list,parent,false);
+        View inflater = LayoutInflater.from(parent.getContext()).inflate(R.layout.modal_coops_available,parent,false);
         context = parent.getContext();
         return new Viewholder(inflater);
     }

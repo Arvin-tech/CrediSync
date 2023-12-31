@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backdrop"
-    tools:context=".Profile">
+    tools:context=".ProfileActivity">
+
 
     <ImageView
         android:id="@+id/backImage"
@@ -28,16 +29,17 @@
         android:textColor="@color/black"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/backImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toEndOf="@+id/backImage"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.571" />
 
     <TextView
         android:layout_width="250dp"
         android:layout_height="24dp"
-        android:fontFamily="@font/montserrat_regular"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Personal Information"
         android:textColor="@color/black"
         android:textSize="16dp"
@@ -101,8 +103,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_round"
-                android:hint="Firstname"
                 android:fontFamily="@font/poppins_regular"
+                android:hint="Firstname"
                 android:inputType="text|textEmailAddress"
                 android:padding="12dp"
                 android:textColor="@color/black"
@@ -128,8 +130,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_round"
-                android:hint="Lastname"
                 android:fontFamily="@font/poppins_regular"
+                android:hint="Lastname"
                 android:inputType="text|textEmailAddress"
                 android:padding="12dp"
                 android:textColor="@color/black"
@@ -163,8 +165,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_round"
-            android:hint="Address"
             android:fontFamily="@font/poppins_regular"
+            android:hint="Address"
             android:inputType="text|textEmailAddress"
             android:padding="12dp"
             android:textColor="@color/black"
@@ -195,9 +197,9 @@
             android:id="@+id/phoneEditTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contact Number"
             android:background="@drawable/edit_round"
             android:fontFamily="@font/poppins_regular"
+            android:hint="Contact Number"
             android:inputType="text|textEmailAddress"
             android:padding="12dp"
             android:textColor="@color/black"
@@ -230,8 +232,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_round"
-            android:hint="Birthdate"
             android:fontFamily="@font/poppins_regular"
+            android:hint="Birthdate"
             android:inputType="text|textEmailAddress"
             android:padding="12dp"
             android:textColor="@color/black"

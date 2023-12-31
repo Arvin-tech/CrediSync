@@ -12,7 +12,7 @@
     <!--buttons-->
     <color name="yellow">#ffd500</color>
     <color name="goldbrown">#d4af37</color>
-    <color name="redtwo">#ED1C24</color>
+    <color name="redtwo">#E76160</color>
 
     <!--status bar and hint text color-->
     <color name="light_gray">#A19D9D</color>
@@ -37,5 +37,8 @@
 
     <!-- for bottom navigation -->
     <color name="bottomnav">#F3ECD9</color>
+
+    <!--for bottom navigation texts-->
+    <color name="bottomnavtexts">#B78403</color>
 
 </resources>

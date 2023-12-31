@@ -36,7 +36,7 @@
         android:id="@+id/firstNameTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Firstname"
         android:textColor="@color/black"
         android:textSize="25dp"
@@ -51,24 +51,25 @@
 
     <!-- Email Address -->
 
+    <!-- Settings Label -->
+
     <TextView
         android:id="@+id/emailTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
         android:fontFamily="@font/poppins_regular"
         android:text="emailadrres@email.com"
         android:textColor="@color/button"
         android:textSize="17dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.293">
+        app:layout_constraintBottom_toTopOf="@+id/settingsTxt"
+        app:layout_constraintEnd_toEndOf="@+id/firstNameTxtView"
+        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintStart_toStartOf="@+id/firstNameTxtView"
+        app:layout_constraintTop_toTopOf="@+id/firstNameTxtView"
+        app:layout_constraintVertical_bias="0.0">
 
     </TextView>
-
-    <!-- Settings Label -->
 
     <TextView
         android:id="@+id/settingsTxt"
@@ -467,48 +468,53 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/homeMenuLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="20dp"
+                        android:layout_width="50dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/baseline_home_24" />
+                        android:src="@drawable/ioshomeoutlined" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Home"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/notifMenuLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="20dp"
+                        android:layout_width="50dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/baseline_notifications_24" />
+                        android:src="@drawable/iosnotifoutlined" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Notifications"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/transactionsMenuLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -519,17 +525,19 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/baseline_list_24" />
+                        android:src="@drawable/ioshistoryoutlined" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Transactions"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/profileMenuLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="15dp"
@@ -541,13 +549,14 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/baseline_account_circle_24" />
+                        android:src="@drawable/iosprofilefilled" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Profile"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/bottomnavtexts" />
 
                 </LinearLayout>
 
