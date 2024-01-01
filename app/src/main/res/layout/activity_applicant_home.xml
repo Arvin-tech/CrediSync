@@ -95,6 +95,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/avatarCardView"
+                    android:foreground="@drawable/click_effect"
+                    android:clickable="true"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="8dp"
@@ -510,6 +512,8 @@
 
                 <LinearLayout
                     android:id="@+id/notifMenuLayout"
+                    android:foreground="@drawable/click_effect"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -520,19 +524,21 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/iosnotifoutlined"/>
+                        android:src="@drawable/iosnotifoutlined" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Notifications"
-                        android:textColor="@color/black"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/transactionsMenuLayout"
+                    android:foreground="@drawable/click_effect"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -556,6 +562,8 @@
 
                 <LinearLayout
                     android:id="@+id/profileMenuLayout"
+                    android:foreground="@drawable/click_effect"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"

@@ -28,6 +28,7 @@ public class TransactionsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent home = new Intent(getApplicationContext(), ApplicantHome.class);
                 startActivity(home);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); //slide to left
             }
         });
 
@@ -36,6 +37,7 @@ public class TransactionsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent notifications = new Intent(getApplicationContext(), NotificationsActivity.class);
                 startActivity(notifications);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); //slide to left
             }
         });
 
@@ -44,6 +46,7 @@ public class TransactionsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent profile  = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(profile);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); //slide to right
             }
         });
     }

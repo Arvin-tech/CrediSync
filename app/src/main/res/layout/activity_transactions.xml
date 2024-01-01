@@ -38,6 +38,8 @@
 
                 <LinearLayout
                     android:id="@+id/homeMenuLayout"
+                    android:foreground="@drawable/click_effect"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -61,6 +63,8 @@
 
                 <LinearLayout
                     android:id="@+id/notifMenuLayout"
+                    android:foreground="@drawable/click_effect"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -107,6 +111,8 @@
 
                 <LinearLayout
                     android:id="@+id/profileMenuLayout"
+                    android:foreground="@drawable/click_effect"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"

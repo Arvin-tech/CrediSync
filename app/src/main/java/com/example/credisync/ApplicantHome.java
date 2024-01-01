@@ -66,6 +66,7 @@ public class ApplicantHome extends AppCompatActivity {
             public void onClick(View view) {
                 Intent notifications = new Intent(getApplicationContext(), NotificationsActivity.class);
                 startActivity(notifications);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); //slide to right
             }
         });
 
@@ -74,6 +75,7 @@ public class ApplicantHome extends AppCompatActivity {
             public void onClick(View view) {
                 Intent transactions = new Intent(getApplicationContext(), TransactionsActivity.class);
                 startActivity(transactions);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); //slide to right
             }
         });
 
@@ -82,6 +84,7 @@ public class ApplicantHome extends AppCompatActivity {
             public void onClick(View view) {
                 Intent profile  = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(profile);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); //slide to right
             }
         });
 

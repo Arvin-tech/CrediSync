@@ -1,6 +1,8 @@
 package com.example.credisync;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
 
 import android.content.Intent;
 import android.os.Build;
@@ -28,6 +30,7 @@ public class NotificationsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent home = new Intent(getApplicationContext(), ApplicantHome.class);
                 startActivity(home);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); //slide to left
             }
         });
 
@@ -36,6 +39,7 @@ public class NotificationsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent transactions = new Intent(getApplicationContext(), TransactionsActivity.class);
                 startActivity(transactions);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); //slide to right
             }
         });
 
@@ -44,6 +48,7 @@ public class NotificationsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent profile  = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(profile);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); //slide to right
             }
         });
     }
@@ -61,4 +66,5 @@ public class NotificationsActivity extends AppCompatActivity {
         transactionsLayout = findViewById(R.id.transactionsMenuLayout);
         profileLayout = findViewById(R.id.profileMenuLayout);
     }
+
 }

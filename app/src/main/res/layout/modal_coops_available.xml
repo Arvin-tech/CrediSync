@@ -4,9 +4,12 @@
     android:layout_width="120dp"
     android:layout_height="220dp"
     android:layout_margin="8dp"
+    android:foreground="@drawable/click_effect"
+    android:clickable="true"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="10dp"
-    app:cardElevation="3dp">
+    app:cardElevation="3dp"
+    android:focusable="true">
 
     <!--this file serves as cardview for available coops in applicant's dashboard-->
 

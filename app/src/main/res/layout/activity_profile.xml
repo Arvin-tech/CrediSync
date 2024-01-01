@@ -61,10 +61,10 @@
         android:fontFamily="@font/poppins_regular"
         android:text="emailadrres@email.com"
         android:textColor="@color/button"
-        android:textSize="17dp"
+        android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/settingsTxt"
         app:layout_constraintEnd_toEndOf="@+id/firstNameTxtView"
-        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="@+id/firstNameTxtView"
         app:layout_constraintTop_toTopOf="@+id/firstNameTxtView"
         app:layout_constraintVertical_bias="0.0">
@@ -112,7 +112,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="Change Password"
             android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
 
         <ImageView
             android:id="@+id/imageView6"
@@ -149,7 +149,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="Transaction History"
             android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -186,7 +186,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="Credit Reports"
             android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -223,7 +223,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="Credit Help"
             android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -260,7 +260,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="Provide Feedback"
             android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -297,7 +297,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="Terms and Conditions"
             android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -334,7 +334,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="Privacy Policy"
             android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -371,7 +371,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="About"
             android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -408,7 +408,7 @@
             android:fontFamily="@font/poppins_bold"
             android:text="Delete Account"
             android:textColor="@color/red"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
 
     </LinearLayout>
 
@@ -439,7 +439,7 @@
             android:fontFamily="@font/poppins_bold"
             android:text="Logout"
             android:textColor="@color/red"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
 
     </LinearLayout>
 
@@ -469,6 +469,8 @@
 
                 <LinearLayout
                     android:id="@+id/homeMenuLayout"
+                    android:foreground="@drawable/click_effect"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -492,6 +494,8 @@
 
                 <LinearLayout
                     android:id="@+id/notifMenuLayout"
+                    android:foreground="@drawable/click_effect"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -515,6 +519,8 @@
 
                 <LinearLayout
                     android:id="@+id/transactionsMenuLayout"
+                    android:foreground="@drawable/click_effect"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
