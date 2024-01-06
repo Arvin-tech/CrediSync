@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="120dp"
-    android:layout_height="220dp"
+    android:layout_width="220dp"
+    android:layout_height="200dp"
     android:layout_margin="8dp"
     android:foreground="@drawable/click_effect"
     android:clickable="true"
@@ -20,20 +20,35 @@
 
         <ImageView
             android:id="@+id/coopLogoImageView"
-            android:layout_width="120dp"
-            android:layout_height="140dp"
-            android:src="@drawable/cficooperative"/>
-
-        <TextView
-            android:id="@+id/coopNameTextView"
-            android:fontFamily="@font/poppins_bold"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_margin="5dp"
-            android:lines="2"
-            android:text="Cebu CFI"
-            android:textColor="@color/black"
-            android:textSize="15dp"/>
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cfipic"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/coopNameTextView"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_width="155dp"
+                android:layout_height="25dp"
+                android:layout_margin="5dp"
+                android:lines="2"
+                android:text="Cebu CFI"
+                android:textColor="@color/black"
+                android:textSize="15dp"/>
+
+            <ImageView
+                android:id="@+id/miniLogoImageView"
+                android:layout_margin="5dp"
+                android:layout_width="45dp"
+                android:layout_height="25dp"
+                android:src="@drawable/cficooperative"/>
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/coopAddressTextView"
@@ -49,4 +64,6 @@
 
     </LinearLayout>
 
+
 </androidx.cardview.widget.CardView>
+

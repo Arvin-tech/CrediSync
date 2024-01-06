@@ -98,20 +98,30 @@ public class ApplicantHome extends AppCompatActivity {
     }
 
     protected void initializeRecyclerView() {
-        String cfiLogo = String.valueOf(R.drawable.cficooperative);
-        String mavencoLogo = String.valueOf(R.drawable.mavenco);
-        String cebuPeoplesLogo = String.valueOf(R.drawable.cpmpc);
-        String coopBankLogo = String.valueOf(R.drawable.cboc);
+
+        //card cover
+        String cfiLogo = String.valueOf(R.drawable.cfipic);
+        String mavencoLogo = String.valueOf(R.drawable.mavencopic);
+        String cebuPeoplesLogo = String.valueOf(R.drawable.cebupeoplepic);
+        String coopBankLogo = String.valueOf(R.drawable.cbocpic);
+        String tayemcoLogo = String.valueOf(R.drawable.tayemcopic);
+
+        //card logo
+        String cfi = String.valueOf(R.drawable.cficooperative);
+        String mavenco = String.valueOf(R.drawable.mavenco);
+        String cebupeople = String.valueOf(R.drawable.cpmpc);
+        String cboc = String.valueOf(R.drawable.cboc);
+
 
         //place here coop details
         ArrayList<CooperativesDomain> items = new ArrayList<>();
 
         //add available coops (implement here from signup in firebase??) items from cooperatives collection in firebase??
-        items.add(new CooperativesDomain("Cebu CFI","Coop Bldg, Capitol Compound Road", cfiLogo));
-        items.add(new CooperativesDomain("MAVENCO","Coop Bldg, Capitol Compound Road", mavencoLogo));
-        items.add(new CooperativesDomain("Coop Bank","Coop Bldg, Capitol Compound Road", coopBankLogo));
-        items.add(new CooperativesDomain("People's Coop","Coop Bldg, Capitol Compound Road", cebuPeoplesLogo));
-        items.add(new CooperativesDomain("TAYEMCO","Coop Bldg, Capitol Compound Road", cfiLogo));
+        items.add(new CooperativesDomain("Cebu CFI","Coop Bldg, Capitol Compound Road", cfiLogo, cfi));
+        items.add(new CooperativesDomain("MAVENCO","National Highway, Consolacion, Cebu", mavencoLogo, mavenco));
+        items.add(new CooperativesDomain("Cooperative Bank of Cebu","CBOC Bldg.,G/F, 30 M. Velez St, Cebu City, Cebu", coopBankLogo, cboc));
+        items.add(new CooperativesDomain("People's Coop","16 Salinas Drive, Apas, Lahug, Cebu City", cebuPeoplesLogo,cebupeople));
+        items.add(new CooperativesDomain("TAYEMCO","Coop Bldg, Capitol Compound Road", tayemcoLogo, cfi)); //temporary logo
 
         recyclerViewCoop.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         adapterCoopList = new CooperativesAdapter(items);

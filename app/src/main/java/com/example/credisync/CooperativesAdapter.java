@@ -37,11 +37,19 @@ public class CooperativesAdapter extends RecyclerView.Adapter<CooperativesAdapte
         holder.coopName.setText(items.get(position).getCoopName());
         holder.coopAddress.setText(items.get(position).getCoopAddress());
 
+        //load card cover photo
         int drawableResourceId=holder.itemView.getResources().getIdentifier(items.get(position).getPicAddress(),"drawable",holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext())
                 .load(drawableResourceId)
                 .transform(new GranularRoundedCorners(30,30,0,0))
                 .into(holder.coopLogo);
+
+        // Load card mini logo
+        int miniLogoResourceId = holder.itemView.getResources().getIdentifier(items.get(position).getMiniPicAddress(), "drawable", holder.itemView.getContext().getPackageName());
+        Glide.with(holder.itemView.getContext())
+                .load(miniLogoResourceId)
+                .transform(new GranularRoundedCorners(15, 15, 0, 0))
+                .into(holder.miniLogo);
     }
 
     @Override
@@ -51,13 +59,14 @@ public class CooperativesAdapter extends RecyclerView.Adapter<CooperativesAdapte
 
     public class Viewholder extends RecyclerView.ViewHolder{
         TextView coopName, coopAddress;
-        ImageView coopLogo;
+        ImageView coopLogo, miniLogo;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             coopName = itemView.findViewById(R.id.coopNameTextView);
             coopAddress = itemView.findViewById(R.id.coopAddressTextView);
             coopLogo = itemView.findViewById(R.id.coopLogoImageView);
+            miniLogo = itemView.findViewById(R.id.miniLogoImageView);
         }
     }
 }

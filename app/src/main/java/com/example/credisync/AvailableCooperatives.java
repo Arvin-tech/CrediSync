@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,9 +18,12 @@ import java.util.ArrayList;
 
 public class AvailableCooperatives extends AppCompatActivity {
 
-    protected RecyclerView.Adapter adapterCoopList;
+    protected CooperativesAdapter cooperativesAdapter;
     protected RecyclerView recyclerViewCoop;
+    protected ArrayList<CooperativesDomain> items;
     protected ImageView backImage;
+
+    private int space;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,26 +43,60 @@ public class AvailableCooperatives extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     private void initializeRecycleView() {
-        String cfiLogo = String.valueOf(R.drawable.cficooperative);
-        String mavencoLogo = String.valueOf(R.drawable.mavenco);
-        String cebuPeoplesLogo = String.valueOf(R.drawable.cpmpc);
-        String coopBankLogo = String.valueOf(R.drawable.cboc);
+
+        //card cover
+        String cfiLogo = String.valueOf(R.drawable.cfipic);
+        String mavencoLogo = String.valueOf(R.drawable.mavencopic);
+        String cebuPeoplesLogo = String.valueOf(R.drawable.cebupeoplepic);
+        String coopBankLogo = String.valueOf(R.drawable.cbocpic);
+        String tayemcoLogo = String.valueOf(R.drawable.tayemcopic);
+
+        //card logo
+        String cfi = String.valueOf(R.drawable.cficooperative);
+        String mavenco = String.valueOf(R.drawable.mavenco);
+        String cebupeople = String.valueOf(R.drawable.cpmpc);
+        String cboc = String.valueOf(R.drawable.cboc);
 
         //place here coop details
-        ArrayList<CooperativesDomain> items = new ArrayList<>();
-
+        items = new ArrayList<>();
         //add available coops (implement here from signup in firebase??) items from cooperatives collection in firebase??
-        items.add(new CooperativesDomain("Mandaue City Public Market Vendors Multi-Purpose Coop","Coop Bldg, Capitol Compound Road" ,mavencoLogo));
-        items.add(new CooperativesDomain("Cebu CFI Community Cooperative","Coop Bldg, Capitol Compound Road" ,cfiLogo));
-        items.add(new CooperativesDomain("Cebu People's Multi-Purpose Cooperative","Coop Bldg, Capitol Compound Road" ,cebuPeoplesLogo));
-        items.add(new CooperativesDomain("Cooperative Bank of Cebu","Coop Bldg, Capitol Compound Road" ,coopBankLogo));
+        items.add(new CooperativesDomain("Cebu CFI","Coop Bldg, Capitol Compound Road", cfiLogo, cfi));
+        items.add(new CooperativesDomain("MAVENCO","National Highway, Consolacion, Cebu", mavencoLogo, mavenco));
+        items.add(new CooperativesDomain("Cooperative Bank of Cebu","CBOC Bldg.,G/F, 30 M. Velez St, Cebu City, Cebu", coopBankLogo, cboc));
+        items.add(new CooperativesDomain("People's Coop","16 Salinas Drive, Apas, Lahug, Cebu City", cebuPeoplesLogo,cebupeople));
+        items.add(new CooperativesDomain("TAYEMCO","Coop Bldg, Capitol Compound Road", tayemcoLogo, cfi)); //temporary logo
 
-        recyclerViewCoop.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        adapterCoopList = new AvailableCooperativesAdapter(items);
-        recyclerViewCoop.setAdapter(adapterCoopList);
+        recyclerViewCoop.setLayoutManager(new LinearLayoutManager(this));
+        cooperativesAdapter = new CooperativesAdapter(items);
+        recyclerViewCoop.setAdapter(cooperativesAdapter);
+
+    }
+
+    public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
+        private int space;
+
+        public SpacesItemDecoration(int space) {
+            this.space = space;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            outRect.left = space;
+            outRect.right = space;
+            outRect.bottom = space;
+
+            // Add top margin only for the first item to avoid double space between items
+            if (parent.getChildAdapterPosition(view) == 0) {
+                outRect.top = space;
+            } else {
+                outRect.top = 0;
+            }
+        }
     }
 
     protected void setStatusBarColor(int color) {

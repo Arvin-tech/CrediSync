@@ -58,19 +58,20 @@
 
                 <ImageView
                     android:id="@+id/imageView8"
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/baseline_notifications_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.723"
+                    app:layout_constraintHorizontal_bias="0.765"
                     app:layout_constraintStart_toEndOf="@+id/textView9"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.533" />
 
                 <ImageView
                     android:id="@+id/imageView10"
-                    android:layout_width="25dp"
-                    android:layout_height="19dp"
+                    android:layout_width="20dp"
+                    android:layout_height="15dp"
                     android:src="@drawable/redot"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView8"
                     app:layout_constraintEnd_toEndOf="@+id/imageView8"
@@ -86,7 +87,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="2"
                     android:textColor="@color/white"
-                    android:textSize="12dp"
+                    android:textSize="9dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView10"
                     app:layout_constraintEnd_toEndOf="@+id/imageView10"
                     app:layout_constraintStart_toStartOf="@+id/imageView10"
@@ -129,6 +130,7 @@
                 android:ems="10"
                 android:fontFamily="@font/montserrat_regular"
                 android:hint="Search"
+                android:textColor="@color/black"
                 android:textColorHint="@color/light_gray"
                 android:inputType="text"
                 android:padding="8dp" />
@@ -155,14 +157,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
                         android:text="350"
-                        android:textColor="@color/white"
-                        android:textSize="45dp"
+                        android:textColor="@color/yellow"
+                        android:textSize="60dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imageView9"
-                        app:layout_constraintHorizontal_bias="0.109"
+                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.192" />
+                        app:layout_constraintVertical_bias="0.714" />
 
                     <TextView
                         android:id="@+id/textView11"
@@ -170,14 +172,13 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
                         android:text="Your credit score went up to"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.121"
+                        app:layout_constraintHorizontal_bias="0.225"
                         app:layout_constraintStart_toEndOf="@+id/creditScore"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.22" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/textView7"
@@ -185,7 +186,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
                         android:text="Last Updated on December 31, 2023"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -196,15 +197,15 @@
 
                     <ImageView
                         android:id="@+id/imageView9"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:src="@drawable/creditcard"
+                        android:layout_width="110dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/cs1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.992"
+                        app:layout_constraintHorizontal_bias="0.498"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="1.0" />
+                        app:layout_constraintVertical_bias="0.0" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -274,7 +275,8 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="Hub"
                         android:textAlignment="center"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="9dp"/>
 
                 </LinearLayout> <!--1st service-->
 
@@ -310,7 +312,8 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="Savings"
                         android:textAlignment="center"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="9dp"/>
 
                 </LinearLayout> <!--2nd service-->
 
@@ -346,7 +349,8 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="Secure"
                         android:textAlignment="center"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="9dp"/>
 
                 </LinearLayout> <!--3rd service-->
 
@@ -382,7 +386,8 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="Share"
                         android:textAlignment="center"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="9dp"/>
 
                 </LinearLayout> <!--4th service-->
 
@@ -418,7 +423,8 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="Deposit"
                         android:textAlignment="center"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="9dp"/>
 
                 </LinearLayout> <!--5th service-->
 
@@ -477,7 +483,7 @@
 
             android:id="@+id/appBar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             app:backgroundTint="@color/bottomnav"
             android:layout_gravity="bottom">
 
@@ -506,6 +512,7 @@
                         android:layout_height="wrap_content"
                         android:text="Home"
                         android:textColor="@color/bottomnavtexts"
+                        android:textSize="10dp"
                         android:textAlignment="center"/>
 
                 </LinearLayout>
@@ -531,6 +538,7 @@
                         android:layout_height="wrap_content"
                         android:text="Notifications"
                         android:textAlignment="center"
+                        android:textSize="10dp"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -556,6 +564,7 @@
                         android:layout_height="wrap_content"
                         android:text="Transactions"
                         android:textColor="@color/black"
+                        android:textSize="10dp"
                         android:textAlignment="center"/>
 
                 </LinearLayout>
@@ -582,6 +591,7 @@
                         android:layout_height="wrap_content"
                         android:text="Profile"
                         android:textColor="@color/black"
+                        android:textSize="10dp"
                         android:textAlignment="center"/>
 
                 </LinearLayout>

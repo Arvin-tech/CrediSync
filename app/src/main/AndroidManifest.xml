@@ -20,6 +20,9 @@
         android:theme="@style/Theme.Beta"
         tools:targetApi="31">
         <activity
+            android:name=".CooperativeInformation"
+            android:exported="false" />
+        <activity
             android:name=".AvailableCooperatives"
             android:exported="false" />
         <activity
