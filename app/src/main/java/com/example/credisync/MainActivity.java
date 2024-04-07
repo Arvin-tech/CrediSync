@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
     //query to firebase
     protected void loginUser() {
         db.collection("Users")
-                .whereEqualTo("email", inputtedEmail)
+                .whereEqualTo("User_EmailAddress", inputtedEmail)
                 .limit(1)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                         if (!queryDocumentSnapshots.isEmpty()) {
                             // User with the provided email found
                             DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
-                            String storedPassword = documentSnapshot.getString("password"); //get the string value of password field
+                            String storedPassword = documentSnapshot.getString("User_Password"); //get the string value of password field
                             if (inputtedPassword.equals(storedPassword)) {
                                 finish();
                                 redirectHomeActivity(inputtedEmail);

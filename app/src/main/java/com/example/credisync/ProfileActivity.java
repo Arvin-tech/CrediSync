@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    protected LinearLayout homeLayout, notifLayout, transactionsLayout;
+    protected LinearLayout homeLayout, notificationLayout, transactionsLayout, changePasswordLayout, transactionsHistoryLayout, creditReportsLayout, creditHelpLayout, feedbackLayout, termsLayout, privacyLayout, aboutLayout, deleteLayout, logoutLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class ProfileActivity extends AppCompatActivity {
         findViewById();
         setStatusBarColor(getResources().getColor(R.color.peacher)); // Set the status bar color
 
+        //bottom navigation activities
         homeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        notifLayout.setOnClickListener(new View.OnClickListener() {
+        notificationLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent notifications = new Intent(getApplicationContext(), NotificationsActivity.class);
@@ -48,12 +49,44 @@ public class ProfileActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); //slide to left\
             }
         });
+
+        //settings activities
+        changePasswordLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent changePassword = new Intent(getApplicationContext(), ChangePassword.class);
+                startActivity(changePassword);
+            }
+        });
+
+        transactionsHistoryLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent transactions = new Intent(getApplicationContext(), TransactionsActivity.class);
+                startActivity(transactions);
+            }
+        });
+
+
     }
 
     protected void findViewById(){
+        //bottom nav
         homeLayout = findViewById(R.id.homeMenuLayout);
-        notifLayout = findViewById(R.id.notifMenuLayout);
+        notificationLayout = findViewById(R.id.notifMenuLayout);
         transactionsLayout = findViewById(R.id.transactionsMenuLayout);
+        //settings
+        changePasswordLayout = findViewById(R.id.changePasswordLinearLayout);
+        transactionsHistoryLayout = findViewById(R.id.transactionHistoryLinearLayout);
+        creditReportsLayout =  findViewById(R.id.creditReportsLinearLayout);
+        creditHelpLayout = findViewById(R.id.creditHelpLinearLayout);
+        feedbackLayout = findViewById(R.id.feedbackLinearLayout);
+        termsLayout = findViewById(R.id.termsConditionsLinearLayout);
+        privacyLayout = findViewById(R.id.privacyLinearLayout);
+        aboutLayout = findViewById(R.id.aboutLinearLayout);
+        deleteLayout = findViewById(R.id.deleteAccountLinearLayout);
+        logoutLayout = findViewById(R.id.logoutLinearLayout);
+
     }
 
     protected void setStatusBarColor(int color) {

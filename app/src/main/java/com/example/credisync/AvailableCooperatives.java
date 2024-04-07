@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class AvailableCooperatives extends AppCompatActivity {
 
-    protected CooperativesAdapter cooperativesAdapter;
+    protected AvailableCooperativesAdapter availablecooperativesAdapter;
     protected RecyclerView recyclerViewCoop;
     protected ArrayList<CooperativesDomain> items;
     protected ImageView backImage;
@@ -72,8 +72,8 @@ public class AvailableCooperatives extends AppCompatActivity {
         items.add(new CooperativesDomain("TAYEMCO","Coop Bldg, Capitol Compound Road", tayemcoLogo, cfi)); //temporary logo
 
         recyclerViewCoop.setLayoutManager(new LinearLayoutManager(this));
-        cooperativesAdapter = new CooperativesAdapter(items);
-        recyclerViewCoop.setAdapter(cooperativesAdapter);
+        availablecooperativesAdapter = new AvailableCooperativesAdapter(items);
+        recyclerViewCoop.setAdapter(availablecooperativesAdapter);
 
     }
 

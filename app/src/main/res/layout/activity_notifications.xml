@@ -25,7 +25,7 @@
 
             android:id="@+id/appBar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             app:backgroundTint="@color/bottomnav"
             android:layout_gravity="bottom">
 
@@ -56,6 +56,7 @@
                         android:layout_height="wrap_content"
                         android:text="Home"
                         android:textColor="@color/black"
+                        android:textSize="10dp"
                         android:textAlignment="center"/>
 
                 </LinearLayout>
@@ -79,6 +80,7 @@
                         android:layout_height="wrap_content"
                         android:text="Notifications"
                         android:textColor="@color/bottomnavtexts"
+                        android:textSize="10dp"
                         android:textAlignment="center"/>
 
                 </LinearLayout>
@@ -104,6 +106,7 @@
                         android:layout_height="wrap_content"
                         android:text="Transactions"
                         android:textColor="@color/black"
+                        android:textSize="10dp"
                         android:textAlignment="center"/>
 
                 </LinearLayout>
@@ -130,6 +133,7 @@
                         android:layout_height="wrap_content"
                         android:text="Profile"
                         android:textColor="@color/black"
+                        android:textSize="10dp"
                         android:textAlignment="center"/>
 
                 </LinearLayout>
